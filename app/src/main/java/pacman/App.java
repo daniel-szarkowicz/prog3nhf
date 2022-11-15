@@ -4,11 +4,15 @@
 package pacman;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static void main(String[] args) throws Throwable {
+        GameWindow window = new GameWindow();
+        Game model = new Game();
+        GameView view = new GameView(model, window);
+        GameController controller = new GameController(model, window);
+        window.setVisible(true);
+        while(true) {
+            window.repaint();
+            Thread.sleep(1000/60);
+        }
     }
 }
