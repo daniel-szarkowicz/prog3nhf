@@ -31,6 +31,6 @@ application {
 
 jar {
     manifest {
-        attrubutes 'Main-Class': 'project.App'
+        attributes 'Main-Class': 'pacman.App'
     }
 }
