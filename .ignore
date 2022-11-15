@@ -1,0 +1,5 @@
+app/bin/
+app/build/
+gradle/
+gradlew
+gradlew.bat
