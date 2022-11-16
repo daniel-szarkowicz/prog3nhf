@@ -1,40 +1,22 @@
 package pacman;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.Map;
 
-public class PacmanController implements KeyListener {
+public class PacmanController {
     private final Pacman model;
+    private final Map<Integer, KeyboardControl> keymap;
 
-    public PacmanController(Pacman model) {
+    public PacmanController(Pacman model, Map<Integer, KeyboardControl> keymap) {
         this.model = model;
+        this.keymap = keymap;
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_A:
-                this.model.setNextDirection(Direction.LEFT);
-                break;
-            case KeyEvent.VK_W:
-                this.model.setNextDirection(Direction.UP);
-                break;
-            case KeyEvent.VK_S:
-                this.model.setNextDirection(Direction.DOWN);
-                break;
-            case KeyEvent.VK_D:
-                this.model.setNextDirection(Direction.RIGHT);
-                break;
-            default:
-                break;
-        }
+        this.keymap.getOrDefault(e.getExtendedKeyCode(), KeyboardControl.NOTHING).command.control(this.model);
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
+    public void tick(double delta) {
+        this.model.move(delta * 3.0);
     }
 }
