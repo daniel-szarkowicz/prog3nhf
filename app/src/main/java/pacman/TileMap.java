@@ -23,7 +23,7 @@ public class TileMap implements Iterable<Tile> {
         var rng = new Random();
         for (int y = 0; y < this.height; ++y) {
             for (int x = 0; x < this.width; ++x) {
-                var wall = rng.nextFloat() > 0.65 && x != 2;
+                var wall = rng.nextFloat() > 0.65 && x != 2 && x != this.width - 3 && y != 2 && y != this.width - 3;
                 tiles.add(new Tile(x, y, this, wall));
             }
         }

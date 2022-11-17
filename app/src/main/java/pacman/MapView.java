@@ -19,22 +19,26 @@ public class MapView {
                 tile.getY() * TILE_SIZE,
                 TILE_SIZE, TILE_SIZE);
                 g.setColor(Color.BLUE);
-                if (tile.getNeighbor(Direction.LEFT) != null) {
+                var leftNeighbor = tile.getNeighbor(Direction.LEFT);
+                var upNeighbor = tile.getNeighbor(Direction.UP);
+                var rightNeighbor = tile.getNeighbor(Direction.RIGHT);
+                var downNeighbor = tile.getNeighbor(Direction.DOWN);
+                if (leftNeighbor != null && !leftNeighbor.isWall()) {
                     g.fillRect(tile.getX() * TILE_SIZE,
                             tile.getY() * TILE_SIZE,
                             3, TILE_SIZE);
                 }
-                if (tile.getNeighbor(Direction.UP) != null) {
+                if (upNeighbor != null && !upNeighbor.isWall()) {
                     g.fillRect(tile.getX() * TILE_SIZE,
                             tile.getY() * TILE_SIZE,
                             TILE_SIZE, 3);
                 }
-                if (tile.getNeighbor(Direction.RIGHT) != null) {
+                if (rightNeighbor != null && !rightNeighbor.isWall()) {
                     g.fillRect(tile.getX() * TILE_SIZE + TILE_SIZE - 3,
                             tile.getY() * TILE_SIZE,
                             3, TILE_SIZE);
                 }
-                if (tile.getNeighbor(Direction.DOWN) != null) {
+                if (downNeighbor != null && !downNeighbor.isWall()) {
                     g.fillRect(tile.getX() * TILE_SIZE,
                             tile.getY() * TILE_SIZE + TILE_SIZE - 3,
                             TILE_SIZE, 3);

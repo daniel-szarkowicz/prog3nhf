@@ -4,10 +4,10 @@ import java.awt.event.KeyEvent;
 import java.util.Map;
 
 public class PacmanController {
-    private final Pacman model;
+    private final Entity model;
     private final Map<Integer, KeyboardControl> keymap;
 
-    public PacmanController(Pacman model, Map<Integer, KeyboardControl> keymap) {
+    public PacmanController(Entity model, Map<Integer, KeyboardControl> keymap) {
         this.model = model;
         this.keymap = keymap;
     }

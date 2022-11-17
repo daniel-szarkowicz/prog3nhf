@@ -3,6 +3,7 @@ package pacman;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,16 +13,21 @@ public class GameView extends JPanel {
     private final Game model;
 
     private final List<PacmanView> pacmanList;
+    private final List<MonsterView> monsterList;
     private final MapView map;
 
     public GameView(Game model, List<Color> pacmanColors) {
         this.model = model;
         this.pacmanList = new ArrayList<>();
+        this.monsterList = new ArrayList<>();
         if (pacmanColors.size() < this.model.pacmanList.size()) {
             throw new RuntimeException("Túl kevés a cucc!");
         }
         for (int i = 0; i < this.model.pacmanList.size(); ++i) {
             this.pacmanList.add(new PacmanView(this.model.pacmanList.get(i), pacmanColors.get(i)));
+        }
+        for (var monster : this.model.monsterList) {
+            this.monsterList.add(new MonsterView(monster, Color.RED));
         }
         this.map = new MapView(this.model.map);
     }
@@ -30,10 +36,16 @@ public class GameView extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.setBackground(Color.BLACK);
+
         var g2d = (Graphics2D) g;
+        // g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        // RenderingHints.VALUE_ANTIALIAS_ON);
         this.map.draw(g2d);
         for (var pacman : this.pacmanList) {
             pacman.draw(g2d);
+        }
+        for (var monster : this.monsterList) {
+            monster.draw(g2d);
         }
     }
 }

@@ -1,19 +1,19 @@
 package pacman;
 
 public enum Direction {
-    UP(0.0, -1.0, "up"),
-    DOWN(0.0, 1.0, "down"),
-    RIGHT(1.0, 0.0, "right"),
-    LEFT(-1.0, 0.0, "left");
+    UP(0.0, -1.0, 90),
+    DOWN(0.0, 1.0, 270),
+    RIGHT(1.0, 0.0, 0),
+    LEFT(-1.0, 0.0, 180);
 
     public double x;
     public double y;
-    public String name;
+    public int angle;
 
-    Direction(double x, double y, String name) {
+    Direction(double x, double y, int angle) {
         this.x = x;
         this.y = y;
-        this.name = name;
+        this.angle = angle;
     }
 
     public Direction opposite() {
