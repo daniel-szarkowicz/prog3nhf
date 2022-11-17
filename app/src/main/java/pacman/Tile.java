@@ -21,6 +21,10 @@ public class Tile {
     public boolean isWall() {
         return this.wall;
     }
+    
+    public void setWall(boolean wall) {
+        this.wall = wall;
+    }
 
     public int getX() {
         return this.x;

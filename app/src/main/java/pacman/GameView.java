@@ -34,8 +34,8 @@ public class GameView extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
         this.setBackground(Color.BLACK);
+        super.paintComponent(g);
 
         var g2d = (Graphics2D) g;
         // g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

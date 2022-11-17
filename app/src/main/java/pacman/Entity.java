@@ -15,14 +15,16 @@ public class Entity {
     }
 
     public void setNextDirection(Direction d) {
-        if (d == this.direction.opposite()) {
-            this.direction = d;
-            this.offset = 1 - this.offset;
-            this.tile.remove(this);
-            this.tile = this.tile.getNeighbor(d);
-            this.tile.add(this);
+        if (!this.dead) {
+            if (d == this.direction.opposite()) {
+                this.direction = d;
+                this.offset = 1 - this.offset;
+                this.tile.remove(this);
+                this.tile = this.tile.getNeighbor(d);
+                this.tile.add(this);
+            }
+            this.nextDirection = d;
         }
-        this.nextDirection = d;
     }
 
     public Direction getDirection() {
@@ -71,7 +73,7 @@ public class Entity {
     public void die() {
         this.dead = true;
     }
-    
+
     public boolean isDead() {
         return this.dead;
     }

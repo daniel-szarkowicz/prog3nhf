@@ -11,7 +11,12 @@ public class App {
     public static final long FRAME_TIME_TARGET = 1000/100;
 
     public static void main(String[] args) throws Throwable {
-        Game model = new Game();
+        var map = mapEditorMain();
+        gameMain(map);
+    }
+    
+    private static void gameMain(TileMap map) throws Throwable {
+        Game model = new Game(map);
         GameView view = new GameView(model, setupColors());
         GameController controller = new GameController(model, setupKeymaps());
 
@@ -21,9 +26,34 @@ public class App {
         window.setVisible(true);
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
-        while (true) {
+        while (window.isVisible()) {
             start = System.currentTimeMillis();
             controller.tick((start - end)/1000.0);
+            window.repaint();
+            end = System.currentTimeMillis();
+            // if (end - start < FRAME_TIME_TARGET) {
+            //     Thread.sleep(FRAME_TIME_TARGET - (end - start));
+            // }
+            Thread.sleep(FRAME_TIME_TARGET);
+        }
+        window.dispose();
+    }
+    
+    private static TileMap mapEditorMain() throws Throwable {
+        MapEditor model = new MapEditor();
+        MapEditorView view = new MapEditorView(model);
+        MapEditorController controller = new MapEditorController(model);
+        
+        GameWindow window = new GameWindow();
+        window.add(view);
+        window.addKeyListener(controller);
+        window.addMouseListener(controller);
+        window.setVisible(true);
+        var start = System.currentTimeMillis();
+        var end = System.currentTimeMillis();
+        while (window.isVisible()) {
+            start = System.currentTimeMillis();
+            // controller.tick((start - end)/1000.0);
             window.repaint();
             end = System.currentTimeMillis();
             if (end - start < FRAME_TIME_TARGET) {
@@ -31,6 +61,8 @@ public class App {
             }
             // Thread.sleep(FRAME_TIME_TARGET);
         }
+        window.dispose();
+        return model.map;
     }
     
     private static List<Color> setupColors() {
