@@ -39,6 +39,9 @@ public class GameController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.model.active = false;
+        }
         for (var pacman : pacmanList) {
             pacman.keyPressed(e);
         }

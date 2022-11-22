@@ -2,56 +2,95 @@ package pacman;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+
 public class App {
     public static final long FRAME_TIME_TARGET = 1000/100;
 
     public static void main(String[] args) throws Throwable {
-        var map = mapEditorMain();
-        gameMain(map);
+        GameWindow window = new GameWindow();
+        window.setVisible(true);
+        while(true) {
+            var action = mainMenu(window);
+            switch (action) {
+                case PLAY:
+                    gameMain(window);
+                    break;
+                case EDITOR:
+                    mapEditorMain(window);
+                    break;
+                case EXIT:
+                    window.dispose();
+                    System.exit(0);
+                    break;
+            }
+        }
     }
-    
-    private static void gameMain(TileMap map) throws Throwable {
+
+    private static MenuAction mainMenu(JFrame window) throws InterruptedException {
+        var panel = new MainMenu();
+        window.add(panel);
+        window.setVisible(true);
+        while(panel.active){
+            Thread.sleep(1);
+        }
+        window.remove(panel);
+        return panel.action;
+    }
+
+    private static void gameMain(JFrame window) throws Throwable {
+        var fc = new JFileChooser();
+        fc.showOpenDialog(window);
+        var file = fc.getSelectedFile();
+        var ois = new ObjectInputStream(new FileInputStream(file));
+        var map = (TileMap) ois.readObject();
+        ois.close();
         Game model = new Game(map);
         GameView view = new GameView(model, setupColors());
         GameController controller = new GameController(model, setupKeymaps());
 
-        GameWindow window = new GameWindow();
         window.add(view);
-        window.addKeyListener(controller);
-        window.setVisible(true);
+        view.addKeyListener(controller);
+        view.requestFocusInWindow();
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
-        while (window.isVisible()) {
+        window.setVisible(true);
+        while (model.active) {
             start = System.currentTimeMillis();
             controller.tick((start - end)/1000.0);
             window.repaint();
             end = System.currentTimeMillis();
-            // if (end - start < FRAME_TIME_TARGET) {
-            //     Thread.sleep(FRAME_TIME_TARGET - (end - start));
-            // }
-            Thread.sleep(FRAME_TIME_TARGET);
+            if (end - start < FRAME_TIME_TARGET) {
+                Thread.sleep(FRAME_TIME_TARGET - (end - start));
+            }
+            // Thread.sleep(FRAME_TIME_TARGET);
         }
-        window.dispose();
+        window.remove(view);
     }
-    
-    private static TileMap mapEditorMain() throws Throwable {
+
+    private static void mapEditorMain(JFrame window) throws Throwable {
         MapEditor model = new MapEditor();
         MapEditorView view = new MapEditorView(model);
         MapEditorController controller = new MapEditorController(model);
-        
-        GameWindow window = new GameWindow();
+
         window.add(view);
-        window.addKeyListener(controller);
-        window.addMouseListener(controller);
-        window.setVisible(true);
+        view.addKeyListener(controller);
+        view.addMouseListener(controller);
+        view.requestFocusInWindow();
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
-        while (window.isVisible()) {
+        window.setVisible(true);
+        while (model.active) {
             start = System.currentTimeMillis();
             // controller.tick((start - end)/1000.0);
             window.repaint();
@@ -61,19 +100,24 @@ public class App {
             }
             // Thread.sleep(FRAME_TIME_TARGET);
         }
-        window.dispose();
-        return model.map;
+        window.remove(view);
+        var fc = new JFileChooser();
+        fc.showSaveDialog(window);
+        var file = fc.getSelectedFile();
+        var oos = new ObjectOutputStream(new FileOutputStream(file));
+        oos.writeObject(model.map);
+        oos.close();
     }
-    
+
     private static List<Color> setupColors() {
         var colors = new ArrayList<Color>();
         colors.add(Color.YELLOW);
         colors.add(Color.GREEN);
         colors.add(Color.PINK);
-        
+
         return colors;
     }
-    
+
     private static List<Map<Integer, PacmanCommand>> setupKeymaps() {
         var keymaps = new ArrayList<Map<Integer, PacmanCommand>>();
         var keymap1 = new HashMap<Integer, PacmanCommand>();
@@ -91,7 +135,7 @@ public class App {
         keymap3.put(KeyEvent.VK_J, PacmanCommand.TURN_DOWN);
         keymap3.put(KeyEvent.VK_H, PacmanCommand.TURN_LEFT);
         keymap3.put(KeyEvent.VK_L, PacmanCommand.TURN_RIGHT);
-        
+
         keymaps.add(keymap1);
         keymaps.add(keymap2);
         keymaps.add(keymap3);

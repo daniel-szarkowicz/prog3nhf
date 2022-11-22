@@ -8,6 +8,7 @@ public class Game {
     public final List<Entity> monsterList;
     public final List<Entity> dotList;
     public final TileMap map;
+    public boolean active;
     
     public Game() {
         this(new TileMap(20));
@@ -25,6 +26,7 @@ public class Game {
         this.monsterList.add(new Entity(this.map.getTile(6, 2)));
         this.monsterList.add(new Entity(this.map.getTile(10, 2)));
         this.monsterList.add(new Entity(this.map.getTile(14, 2)));
+        this.active = true;
     }
     
     public void populateMap() {

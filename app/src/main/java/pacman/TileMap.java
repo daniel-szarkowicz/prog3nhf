@@ -1,5 +1,6 @@
 package pacman;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-public class TileMap implements Iterable<Tile> {
+public class TileMap implements Iterable<Tile>, Serializable {
     private final List<Tile> tiles;
     private final int width;
     private final int height;

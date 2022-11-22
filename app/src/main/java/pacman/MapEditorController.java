@@ -14,6 +14,9 @@ public class MapEditorController implements KeyListener, MouseListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.model.active = false;
+        }
     }
 
     @Override
