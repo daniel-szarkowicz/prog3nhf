@@ -5,15 +5,15 @@ import java.util.Map;
 
 public class PacmanController {
     private final Entity model;
-    private final Map<Integer, KeyboardControl> keymap;
+    private final Map<Integer, PacmanCommand> keymap;
 
-    public PacmanController(Entity model, Map<Integer, KeyboardControl> keymap) {
+    public PacmanController(Entity model, Map<Integer, PacmanCommand> keymap) {
         this.model = model;
         this.keymap = keymap;
     }
 
     public void keyPressed(KeyEvent e) {
-        this.keymap.getOrDefault(e.getExtendedKeyCode(), KeyboardControl.NOTHING).command.control(this.model);
+        this.keymap.getOrDefault(e.getExtendedKeyCode(), PacmanCommand.NOTHING).control(this.model);
     }
 
     public void tick(double delta) {

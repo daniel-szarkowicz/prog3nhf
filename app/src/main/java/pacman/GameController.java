@@ -12,7 +12,7 @@ public class GameController implements KeyListener {
     private final List<PacmanController> pacmanList;
     private final List<MonsterController> monsterList;
 
-    public GameController(Game model, List<Map<Integer, KeyboardControl>> pacmanKeymaps) {
+    public GameController(Game model, List<Map<Integer, PacmanCommand>> pacmanKeymaps) {
         this.model = model;
         this.pacmanList = new ArrayList<>();
         this.monsterList = new ArrayList<>();

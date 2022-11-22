@@ -74,23 +74,23 @@ public class App {
         return colors;
     }
     
-    private static List<Map<Integer, KeyboardControl>> setupKeymaps() {
-        var keymaps = new ArrayList<Map<Integer, KeyboardControl>>();
-        var keymap1 = new HashMap<Integer, KeyboardControl>();
-        keymap1.put(KeyEvent.VK_W, KeyboardControl.TURN_UP);
-        keymap1.put(KeyEvent.VK_S, KeyboardControl.TURN_DOWN);
-        keymap1.put(KeyEvent.VK_A, KeyboardControl.TURN_LEFT);
-        keymap1.put(KeyEvent.VK_D, KeyboardControl.TURN_RIGHT);
-        var keymap2 = new HashMap<Integer, KeyboardControl>();
-        keymap2.put(KeyEvent.VK_UP, KeyboardControl.TURN_UP);
-        keymap2.put(KeyEvent.VK_DOWN, KeyboardControl.TURN_DOWN);
-        keymap2.put(KeyEvent.VK_LEFT, KeyboardControl.TURN_LEFT);
-        keymap2.put(KeyEvent.VK_RIGHT, KeyboardControl.TURN_RIGHT);
-        var keymap3 = new HashMap<Integer, KeyboardControl>();
-        keymap3.put(KeyEvent.VK_K, KeyboardControl.TURN_UP);
-        keymap3.put(KeyEvent.VK_J, KeyboardControl.TURN_DOWN);
-        keymap3.put(KeyEvent.VK_H, KeyboardControl.TURN_LEFT);
-        keymap3.put(KeyEvent.VK_L, KeyboardControl.TURN_RIGHT);
+    private static List<Map<Integer, PacmanCommand>> setupKeymaps() {
+        var keymaps = new ArrayList<Map<Integer, PacmanCommand>>();
+        var keymap1 = new HashMap<Integer, PacmanCommand>();
+        keymap1.put(KeyEvent.VK_W, PacmanCommand.TURN_UP);
+        keymap1.put(KeyEvent.VK_S, PacmanCommand.TURN_DOWN);
+        keymap1.put(KeyEvent.VK_A, PacmanCommand.TURN_LEFT);
+        keymap1.put(KeyEvent.VK_D, PacmanCommand.TURN_RIGHT);
+        var keymap2 = new HashMap<Integer, PacmanCommand>();
+        keymap2.put(KeyEvent.VK_UP, PacmanCommand.TURN_UP);
+        keymap2.put(KeyEvent.VK_DOWN, PacmanCommand.TURN_DOWN);
+        keymap2.put(KeyEvent.VK_LEFT, PacmanCommand.TURN_LEFT);
+        keymap2.put(KeyEvent.VK_RIGHT, PacmanCommand.TURN_RIGHT);
+        var keymap3 = new HashMap<Integer, PacmanCommand>();
+        keymap3.put(KeyEvent.VK_K, PacmanCommand.TURN_UP);
+        keymap3.put(KeyEvent.VK_J, PacmanCommand.TURN_DOWN);
+        keymap3.put(KeyEvent.VK_H, PacmanCommand.TURN_LEFT);
+        keymap3.put(KeyEvent.VK_L, PacmanCommand.TURN_RIGHT);
         
         keymaps.add(keymap1);
         keymaps.add(keymap2);
