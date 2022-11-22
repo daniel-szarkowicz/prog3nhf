@@ -12,6 +12,7 @@ public class Entity {
         this.nextDirection = Direction.UP;
         this.offset = 0.0;
         this.tile = startingTile;
+        this.tile.add(this);
     }
 
     public void setNextDirection(Direction d) {
