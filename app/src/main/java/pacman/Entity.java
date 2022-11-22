@@ -1,6 +1,8 @@
 package pacman;
 
-public class Entity {
+import java.io.Serializable;
+
+public class Entity implements Serializable {
     private Direction direction;
     private Direction nextDirection;
     private double offset;
@@ -77,5 +79,9 @@ public class Entity {
 
     public boolean isDead() {
         return this.dead;
+    }
+    
+    public boolean isMoving() {
+        return this.offset != 0.0;
     }
 }

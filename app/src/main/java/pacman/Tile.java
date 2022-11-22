@@ -1,9 +1,10 @@
 package pacman;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tile {
+public class Tile implements Serializable {
     private final int x;
     private final int y;
     private final TileMap map;

@@ -11,7 +11,7 @@ public class MonsterController {
     }
     
     public void tick(double delta) {
-        if (RANDOM.nextFloat() < 0.01) {
+        if ((!this.model.isMoving() && RANDOM.nextFloat() < delta*10) || RANDOM.nextFloat() < delta) {
             var nextDirection = Direction.values()[RANDOM.nextInt(4)];
             this.model.setNextDirection(nextDirection);
         }
