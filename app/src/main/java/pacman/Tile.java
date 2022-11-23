@@ -37,7 +37,7 @@ public class Tile implements Serializable {
     
     public void add(Entity entity) {
         for (var e : this.entities) {
-            e.die();
+            entity.collideWith(e);
         }
         this.entities.add(entity);
     }

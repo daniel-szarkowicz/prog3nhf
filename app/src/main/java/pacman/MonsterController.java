@@ -15,7 +15,7 @@ public class MonsterController {
             var nextDirection = Direction.values()[RANDOM.nextInt(4)];
             this.model.setNextDirection(nextDirection);
         }
-        this.model.move(delta * 5.0);
+        this.model.move(delta * 3.0);
     }
     
     static {

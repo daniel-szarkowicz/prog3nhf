@@ -23,5 +23,15 @@ public class MapEditorView extends JPanel {
 
         var g2d = (Graphics2D) g;
         this.map.draw(g2d);
+        var pacmanSpawn = this.model.map.getPacmanSpawn();
+        g.setColor(Color.YELLOW);
+        g.fillOval(pacmanSpawn.getX() * MapView.TILE_SIZE,
+                pacmanSpawn.getY() * MapView.TILE_SIZE,
+                MapView.TILE_SIZE, MapView.TILE_SIZE);
+        var monsterSpawn = this.model.map.getMonsterSpawn();
+        g.setColor(Color.RED);
+        g.fillOval(monsterSpawn.getX() * MapView.TILE_SIZE,
+                monsterSpawn.getY() * MapView.TILE_SIZE,
+                MapView.TILE_SIZE, MapView.TILE_SIZE);
     }
 }

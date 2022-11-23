@@ -2,7 +2,7 @@ package pacman;
 
 import java.io.Serializable;
 
-public class Entity implements Serializable {
+public abstract class Entity implements Serializable {
     private Direction direction;
     private Direction nextDirection;
     private double offset;
@@ -18,16 +18,17 @@ public class Entity implements Serializable {
     }
 
     public void setNextDirection(Direction d) {
-        if (!this.dead) {
-            if (d == this.direction.opposite()) {
-                this.direction = d;
-                this.offset = 1 - this.offset;
-                this.tile.remove(this);
-                this.tile = this.tile.getNeighbor(d);
-                this.tile.add(this);
-            }
-            this.nextDirection = d;
-        }
+        // if (!this.dead) {
+        //     if (d == this.direction.opposite()) {
+        //         this.direction = d;
+        //         this.offset = 1.0 - this.offset;
+        //         this.tile.remove(this);
+        //         this.tile = this.tile.getNeighbor(d);
+        //         this.tile.add(this);
+        //     }
+        //     this.nextDirection = d;
+        // }
+        this.nextDirection = d;
     }
 
     public Direction getDirection() {
@@ -51,7 +52,12 @@ public class Entity implements Serializable {
     // TODO: maybe move to PacmanController
     public void move(double amount) {
         if (!this.dead) {
+            if (this.direction.opposite() == this.nextDirection) {
+                this.tile.moveEntity(this, this.nextDirection);
+                this.direction = this.nextDirection;
+            }
             if (this.offset <= 0.0) {
+                this.offset = 0.0;
                 this.tile.moveEntity(this, this.nextDirection);
                 if (this.offset > 0.0) {
                     this.direction = this.nextDirection;
@@ -70,7 +76,7 @@ public class Entity implements Serializable {
         this.tile.remove(this);
         this.tile = tile;
         this.tile.add(this);
-        this.offset = 1.0;
+        this.offset = 1.0 - this.offset;
     }
 
     public void die() {
@@ -84,4 +90,10 @@ public class Entity implements Serializable {
     public boolean isMoving() {
         return this.offset != 0.0;
     }
+    
+    public abstract void collideWith(Entity entity);
+    
+    public abstract void meetMonster(Monster monster);
+    
+    public abstract void meetPacman(Pacman pacman);
 }

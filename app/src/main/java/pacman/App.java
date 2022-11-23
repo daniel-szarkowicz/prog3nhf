@@ -1,23 +1,11 @@
 package pacman;
 
 import java.awt.Color;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -68,10 +56,10 @@ public class App {
 
         window.add(view);
         view.addKeyListener(controller);
-        view.requestFocusInWindow();
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
         window.setVisible(true);
+        view.requestFocusInWindow();
         while (model.active) {
             start = System.currentTimeMillis();
             controller.tick((start - end) / 1000.0);
@@ -112,6 +100,17 @@ public class App {
         fileMenu.add(saveMenuItem);
         fileMenu.add(newMenuItem);
         menubar.add(fileMenu);
+        var editMenu = new JMenu("Edit");
+        var wallMenuItem = new JMenuItem("Wall");
+        var pacmanSpawnMenuItem = new JMenuItem("Pacman Spawn");
+        var monsterSpawnMenuItem = new JMenuItem("Monster Spawn");
+        wallMenuItem.addActionListener(e -> controller.mode = MapEditorMode.WALL);
+        pacmanSpawnMenuItem.addActionListener(e -> controller.mode = MapEditorMode.PACMAN_SPAWN);
+        monsterSpawnMenuItem.addActionListener(e -> controller.mode = MapEditorMode.MONSTER_SPAWN);
+        editMenu.add(wallMenuItem);
+        editMenu.add(pacmanSpawnMenuItem);
+        editMenu.add(monsterSpawnMenuItem);
+        menubar.add(editMenu);
         window.setJMenuBar(menubar);
         view.addKeyListener(controller);
         view.addMouseListener(controller);

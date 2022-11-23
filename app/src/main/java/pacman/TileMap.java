@@ -21,6 +21,8 @@ public class TileMap implements Iterable<Tile>, Serializable {
     private List<Tile> tiles;
     private int width;
     private int height;
+    public Tile pacmanSpawn;
+    public Tile monsterSpawn;
 
     public TileMap(int size) {
         this(size, size);
@@ -31,12 +33,24 @@ public class TileMap implements Iterable<Tile>, Serializable {
         this.height = height;
         tiles = new ArrayList<Tile>(this.width * this.height);
         var rng = new Random();
+        Tile firstNotWall = null;
+        Tile lastNotWall = null;
         for (int y = 0; y < this.height; ++y) {
             for (int x = 0; x < this.width; ++x) {
                 var wall = rng.nextFloat() > 0.65 && x != 2 && x != this.width - 3 && y != 2 && y != this.width - 3;
-                tiles.add(new Tile(x, y, this, wall));
+                var tile = new Tile(x, y, this, wall);
+                if (!wall) {
+                    if (firstNotWall == null) {
+                        firstNotWall = tile;
+                    } else {
+                        lastNotWall = tile;
+                    }
+                }
+                tiles.add(tile);
             }
         }
+        this.pacmanSpawn = firstNotWall;
+        this.monsterSpawn = lastNotWall;
     }
 
     public @Nullable Tile getTile(int x, int y) {
@@ -56,6 +70,24 @@ public class TileMap implements Iterable<Tile>, Serializable {
         this.tiles = map.tiles;
         this.width = map.width;
         this.height = map.height;
+        this.pacmanSpawn = map.pacmanSpawn;
+        this.monsterSpawn = map.monsterSpawn;
+    }
+
+    public Tile getPacmanSpawn() {
+        return this.pacmanSpawn;
+    }
+
+    public void setPacmanSpawn(Tile pacmanSpawn) {
+        this.pacmanSpawn = pacmanSpawn;
+    }
+
+    public Tile getMonsterSpawn() {
+        return this.monsterSpawn;
+    }
+
+    public void setMonsterSpawn(Tile monsterSpawn) {
+        this.monsterSpawn = monsterSpawn;
     }
 
     public static boolean saveFileChoose(TileMap map, JFrame window) {

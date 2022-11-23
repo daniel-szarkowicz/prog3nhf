@@ -16,8 +16,8 @@ public class MapView {
             if (tile.isWall()) {
                 g.setColor(Color.DARK_GRAY);
                 g.fillRect(tile.getX() * TILE_SIZE,
-                tile.getY() * TILE_SIZE,
-                TILE_SIZE, TILE_SIZE);
+                        tile.getY() * TILE_SIZE,
+                        TILE_SIZE, TILE_SIZE);
                 g.setColor(Color.BLUE);
                 var leftNeighbor = tile.getNeighbor(Direction.LEFT);
                 var upNeighbor = tile.getNeighbor(Direction.UP);
