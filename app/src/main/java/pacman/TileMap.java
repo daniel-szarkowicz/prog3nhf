@@ -1,17 +1,26 @@
 package pacman;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import javax.annotation.Nullable;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 public class TileMap implements Iterable<Tile>, Serializable {
-    private final List<Tile> tiles;
-    private final int width;
-    private final int height;
+    private List<Tile> tiles;
+    private int width;
+    private int height;
 
     public TileMap(int size) {
         this(size, size);
@@ -41,5 +50,47 @@ public class TileMap implements Iterable<Tile>, Serializable {
     @Override
     public Iterator<Tile> iterator() {
         return tiles.iterator();
+    }
+
+    public void from(TileMap map) {
+        this.tiles = map.tiles;
+        this.width = map.width;
+        this.height = map.height;
+    }
+
+    public static boolean saveFileChoose(TileMap map, JFrame window) {
+        var fc = new JFileChooser(System.getProperty("user.dir"));
+        fc.showSaveDialog(window);
+        var file = fc.getSelectedFile();
+        if (file == null) {
+            return false;
+        } else {
+            try {
+                var os = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream(file)));
+                os.writeObject(map);
+                os.close();
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
+        }
+    }
+
+    public static TileMap openFileChoose(JFrame window) {
+        var fc = new JFileChooser(System.getProperty("user.dir"));
+        fc.showOpenDialog(window);
+        var file = fc.getSelectedFile();
+        if (file == null) {
+            return null;
+        } else {
+            try {
+                var is = new ObjectInputStream(new GZIPInputStream(new FileInputStream(file)));
+                var map = (TileMap) is.readObject();
+                is.close();
+                return map;
+            } catch (IOException | ClassNotFoundException e) {
+                return null;
+            }
+        }
     }
 }

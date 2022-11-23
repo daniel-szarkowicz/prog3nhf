@@ -1,7 +1,7 @@
 package pacman;
 
 public class MapEditor {
-    public final TileMap map;
+    public TileMap map;
     public boolean active;
     
     public MapEditor() {

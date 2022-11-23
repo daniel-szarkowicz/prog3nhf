@@ -8,6 +8,6 @@ public class GameWindow extends JFrame {
         // this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(MapView.TILE_SIZE * 20, MapView.TILE_SIZE * 20);
-        this.setResizable(false);
+        // this.setResizable(false);
     }
 }

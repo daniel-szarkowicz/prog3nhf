@@ -1,6 +1,8 @@
 package pacman;
 
 import java.awt.Color;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,8 +16,12 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class App {
     public static final long FRAME_TIME_TARGET = 1000 / 100;
@@ -52,16 +58,9 @@ public class App {
     }
 
     private static void gameMain(JFrame window) throws Throwable {
-        var fc = new JFileChooser(System.getProperty("user.dir"));
-        fc.showOpenDialog(window);
-        TileMap map = null;
-        var file = fc.getSelectedFile();
-        if (file == null) {
+        var map = TileMap.openFileChoose(window);
+        if (map == null) {
             map = new TileMap(20);
-        } else {
-            var ois = new ObjectInputStream(new GZIPInputStream(new FileInputStream(file)));
-            map = (TileMap) ois.readObject();
-            ois.close();
         }
         Game model = new Game(map);
         GameView view = new GameView(model, setupColors());
@@ -92,33 +91,47 @@ public class App {
         MapEditorController controller = new MapEditorController(model);
 
         window.add(view);
+        var menubar = new JMenuBar();
+        var fileMenu = new JMenu("File");
+        var openMenuItem = new JMenuItem("Open");
+        var saveMenuItem = new JMenuItem("Save");
+        var newMenuItem = new JMenuItem("New");
+        openMenuItem.addActionListener(e -> {
+            var map = TileMap.openFileChoose(window);
+            if (map != null) {
+                model.map.from(map);
+            }
+        });
+        saveMenuItem.addActionListener(e -> {
+            TileMap.saveFileChoose(model.map, window);
+        });
+        newMenuItem.addActionListener(e -> {
+            model.map.from(new TileMap(20));
+        });
+        fileMenu.add(openMenuItem);
+        fileMenu.add(saveMenuItem);
+        fileMenu.add(newMenuItem);
+        menubar.add(fileMenu);
+        window.setJMenuBar(menubar);
         view.addKeyListener(controller);
         view.addMouseListener(controller);
         view.requestFocusInWindow();
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
         window.setVisible(true);
-        File file = null;
-        while (file == null) {
-            model.active = true;
-            while (model.active) {
-                start = System.currentTimeMillis();
-                // controller.tick((start - end)/1000.0);
-                window.repaint();
-                end = System.currentTimeMillis();
-                if (end - start < FRAME_TIME_TARGET) {
-                    Thread.sleep(FRAME_TIME_TARGET - (end - start));
-                }
-                // Thread.sleep(FRAME_TIME_TARGET);
+        model.active = true;
+        while (model.active) {
+            start = System.currentTimeMillis();
+            // controller.tick((start - end)/1000.0);
+            window.repaint();
+            end = System.currentTimeMillis();
+            if (end - start < FRAME_TIME_TARGET) {
+                Thread.sleep(FRAME_TIME_TARGET - (end - start));
             }
-            var fc = new JFileChooser(System.getProperty("user.dir"));
-            fc.showSaveDialog(window);
-            file = fc.getSelectedFile();
+            // Thread.sleep(FRAME_TIME_TARGET);
         }
         window.remove(view);
-        var os = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream(file)));
-        os.writeObject(model.map);
-        os.close();
+        window.setJMenuBar(null);
     }
 
     private static List<Color> setupColors() {
