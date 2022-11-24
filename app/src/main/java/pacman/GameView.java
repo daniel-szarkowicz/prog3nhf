@@ -27,6 +27,9 @@ public class GameView extends JPanel {
         for (var dot : this.model.dotList) {
             this.entityList.add(new DotView(dot));
         }
+        for (var largeDot : this.model.largeDotList) {
+            this.entityList.add(new LargeDotView(largeDot));
+        }
         for (var blinky: this.model.blinkyList) {
             this.entityList.add(new MonsterView(blinky, Color.RED));
         }

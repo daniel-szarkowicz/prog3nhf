@@ -2,6 +2,7 @@ package pacman;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
     public final List<Entity> pacmanList;
@@ -9,6 +10,7 @@ public class Game {
     public final List<Entity> pinkyList;
     public final List<Entity> inkyList;
     public final List<Entity> dotList;
+    public final List<Entity> largeDotList;
     public final TileMap map;
     public boolean active;
     
@@ -19,6 +21,7 @@ public class Game {
     public Game(TileMap map) {
         this.map = map;
         this.dotList = new ArrayList<>();
+        this.largeDotList = new ArrayList<>();
         this.populateMap();
         this.pacmanList = new ArrayList<>();
         this.pacmanList.add(new Pacman(this.map.getPacmanSpawn()));
@@ -34,9 +37,15 @@ public class Game {
     }
     
     public void populateMap() {
+        var random = new Random();
         for (var tile : this.map) {
-            if (!tile.isWall())
-            this.dotList.add(new Dot(tile));
+            if (!tile.isWall()) {
+                if (random.nextFloat() < 0.05) {
+                    this.largeDotList.add(new LargeDot(tile));
+                } else {
+                    this.dotList.add(new Dot(tile));
+                }
+            }
         }
     }
 }

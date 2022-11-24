@@ -14,7 +14,7 @@ public class MonsterController extends EntityController {
             var nextDirection = Direction.values()[RANDOM.nextInt(4)];
             model.setNextDirection(nextDirection);
         }
-        model.move(delta * 3.0);
+        model.move(3.0, delta);
     }
     
     static {

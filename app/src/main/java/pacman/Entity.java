@@ -7,7 +7,8 @@ public abstract class Entity implements Serializable {
     private Direction nextDirection;
     private double offset;
     private Tile tile;
-    private boolean dead = false;
+    private final Tile spawnTile;
+    private double respawn_timer;
 
     public Entity(Tile startingTile) {
         this.direction = Direction.UP;
@@ -15,6 +16,8 @@ public abstract class Entity implements Serializable {
         this.offset = 0.0;
         this.tile = startingTile;
         this.tile.add(this);
+        this.spawnTile = startingTile;
+        this.respawn_timer = 0.0;
     }
 
     public void setNextDirection(Direction d) {
@@ -49,9 +52,13 @@ public abstract class Entity implements Serializable {
         return this.tile.getY() - this.direction.y * offset;
     }
 
-    // TODO: maybe move to PacmanController
-    public void move(double amount) {
-        if (!this.dead) {
+    public void move(double speed, double delta) {
+        if (this.isDead()) {
+            this.respawn_timer -= delta;
+            if (!this.isDead()) {
+                this.respawn();
+            }
+        } else {
             if (this.direction.opposite() == this.nextDirection) {
                 this.tile.moveEntity(this, this.nextDirection);
                 this.direction = this.nextDirection;
@@ -65,7 +72,7 @@ public abstract class Entity implements Serializable {
                     this.tile.moveEntity(this, this.direction);
                 }
             }
-            this.offset -= amount;
+            this.offset -= speed * delta;
             if (this.offset <= 0.0) {
                 this.offset = 0.0;
             }
@@ -84,11 +91,18 @@ public abstract class Entity implements Serializable {
     }
 
     public void die() {
-        this.dead = true;
+        this.respawn_timer = 10.0;
+    }
+    
+    public void respawn() {
+        this.tile.remove(this);
+        this.tile = this.spawnTile;
+        this.tile.add(this);
+        this.offset = 0.0;
     }
 
     public boolean isDead() {
-        return this.dead;
+        return this.respawn_timer > 0.0;
     }
 
     public boolean isMoving() {

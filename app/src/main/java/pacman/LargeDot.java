@@ -1,13 +1,12 @@
 package pacman;
 
-public class Monster extends Entity {
-    public Monster(Tile startingTile) {
+public class LargeDot extends Entity {
+    public LargeDot(Tile startingTile) {
         super(startingTile);
     }
 
     @Override
     public void collideWith(Entity entity) {
-        entity.meetMonster(this);
     }
 
     @Override
@@ -16,10 +15,9 @@ public class Monster extends Entity {
 
     @Override
     public void meetPacman(Pacman pacman) {
-        if (pacman.isStrong()) {
+        if (!this.isDead()) {
             this.die();
-        } else if(!this.isDead()) {
-            pacman.die();
+            pacman.setStrong();
         }
     }
 }

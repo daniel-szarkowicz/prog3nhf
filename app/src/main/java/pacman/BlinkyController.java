@@ -9,14 +9,14 @@ public class BlinkyController extends EntityController {
         var nextDirection = model.getTile().getPacmanPathDirection();
         if (nextDirection != null) {
             model.setNextDirection(nextDirection);
-            model.move(delta * 2.0);
+            model.move(2.0, delta);
         }
         else {
             if ((!model.isMoving() && MonsterController.RANDOM.nextFloat() < delta*10) || MonsterController.RANDOM.nextFloat() < delta) {
                 nextDirection = Direction.values()[MonsterController.RANDOM.nextInt(4)];
                 model.setNextDirection(nextDirection);
             }
-            model.move(delta * 3.0);
+            model.move(3.0, delta);
         }
     }
 }

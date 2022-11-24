@@ -97,11 +97,17 @@ public class App {
         newMenuItem.addActionListener(e -> {
             Integer width = null;
             while (width == null) {
-                width = Integer.parseInt(JOptionPane.showInputDialog("Map width:"));
+                var w = JOptionPane.showInputDialog("Map width:");
+                if (w != null) {
+                    width = Integer.parseInt(w);
+                }
             }
             Integer height = null;
             while (height == null) {
-                height = Integer.parseInt(JOptionPane.showInputDialog("Map height:"));
+                var h = JOptionPane.showInputDialog("Map height:");
+                if (h != null) {
+                    height = Integer.parseInt(h);
+                }
             }
             model.map.from(new TileMap(width, height));
         });

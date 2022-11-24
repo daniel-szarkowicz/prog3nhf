@@ -18,6 +18,6 @@ public class PacmanController extends EntityController {
 
     @Override
     public void control(double delta, Entity model) {
-        model.move(delta * 3.0);
+        model.move(3.0, delta);
     }
 }

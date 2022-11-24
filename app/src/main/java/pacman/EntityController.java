@@ -10,9 +10,7 @@ public abstract class EntityController {
     }
     
     public final void tick(double delta) {
-        if (!this.model.isDead()) {
-            this.control(delta, this.model);
-        }
+        this.control(delta, this.model);
     }
 
     public void keyPressed(KeyEvent e) {
