@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class App {
     public static final long FRAME_TIME_TARGET = 1000 / 100;
@@ -94,7 +95,15 @@ public class App {
             TileMap.saveFileChoose(model.map, window);
         });
         newMenuItem.addActionListener(e -> {
-            model.map.from(new TileMap(20));
+            Integer width = null;
+            while (width == null) {
+                width = Integer.parseInt(JOptionPane.showInputDialog("Map width:"));
+            }
+            Integer height = null;
+            while (height == null) {
+                height = Integer.parseInt(JOptionPane.showInputDialog("Map height:"));
+            }
+            model.map.from(new TileMap(width, height));
         });
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);

@@ -55,7 +55,7 @@ public class TileMap implements Iterable<Tile>, Serializable {
 
     public @Nullable Tile getTile(int x, int y) {
         if (0 <= x && x < this.width && 0 <= y && y < this.height) {
-            return tiles.get(y * this.height + x);
+            return tiles.get(y * this.width + x);
         } else {
             return null;
         }
