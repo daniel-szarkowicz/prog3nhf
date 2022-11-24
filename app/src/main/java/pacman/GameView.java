@@ -24,11 +24,17 @@ public class GameView extends JPanel {
         for (int i = 0; i < this.model.pacmanList.size(); ++i) {
             this.entityList.add(new PacmanView(this.model.pacmanList.get(i), pacmanColors.get(i)));
         }
-        for (var monster : this.model.monsterList) {
-            this.entityList.add(new MonsterView(monster, Color.RED));
-        }
         for (var dot : this.model.dotList) {
             this.entityList.add(new DotView(dot));
+        }
+        for (var blinky: this.model.blinkyList) {
+            this.entityList.add(new MonsterView(blinky, Color.RED));
+        }
+        for (var inky: this.model.inkyList) {
+            this.entityList.add(new MonsterView(inky, Color.BLUE));
+        }
+        for (var pinky: this.model.pinkyList) {
+            this.entityList.add(new MonsterView(pinky, Color.PINK));
         }
         this.map = new MapView(this.model.map);
     }

@@ -19,14 +19,14 @@ public abstract class Entity implements Serializable {
 
     public void setNextDirection(Direction d) {
         // if (!this.dead) {
-        //     if (d == this.direction.opposite()) {
-        //         this.direction = d;
-        //         this.offset = 1.0 - this.offset;
-        //         this.tile.remove(this);
-        //         this.tile = this.tile.getNeighbor(d);
-        //         this.tile.add(this);
-        //     }
-        //     this.nextDirection = d;
+        // if (d == this.direction.opposite()) {
+        // this.direction = d;
+        // this.offset = 1.0 - this.offset;
+        // this.tile.remove(this);
+        // this.tile = this.tile.getNeighbor(d);
+        // this.tile.add(this);
+        // }
+        // this.nextDirection = d;
         // }
         this.nextDirection = d;
     }
@@ -79,6 +79,10 @@ public abstract class Entity implements Serializable {
         this.offset = 1.0 - this.offset;
     }
 
+    public Tile getTile() {
+        return this.tile;
+    }
+
     public void die() {
         this.dead = true;
     }
@@ -86,14 +90,14 @@ public abstract class Entity implements Serializable {
     public boolean isDead() {
         return this.dead;
     }
-    
+
     public boolean isMoving() {
         return this.offset != 0.0;
     }
-    
+
     public abstract void collideWith(Entity entity);
-    
+
     public abstract void meetMonster(Monster monster);
-    
+
     public abstract void meetPacman(Pacman pacman);
 }

@@ -2,20 +2,19 @@ package pacman;
 
 import java.util.Random;
 
-public class MonsterController {
-    private static final Random RANDOM;
-    private final Entity model;
+public class MonsterController extends EntityController {
+    public static final Random RANDOM;
     
     public MonsterController(Entity model) {
-        this.model = model;
+        super(model);
     }
     
-    public void tick(double delta) {
-        if ((!this.model.isMoving() && RANDOM.nextFloat() < delta*10) || RANDOM.nextFloat() < delta) {
+    public void control(double delta, Entity model) {
+        if ((!model.isMoving() && RANDOM.nextFloat() < delta*10) || RANDOM.nextFloat() < delta) {
             var nextDirection = Direction.values()[RANDOM.nextInt(4)];
-            this.model.setNextDirection(nextDirection);
+            model.setNextDirection(nextDirection);
         }
-        this.model.move(delta * 3.0);
+        model.move(delta * 3.0);
     }
     
     static {

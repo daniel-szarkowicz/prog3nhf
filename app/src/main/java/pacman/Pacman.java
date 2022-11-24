@@ -3,6 +3,7 @@ package pacman;
 public class Pacman extends Entity {
     public Pacman(Tile startingTile) {
         super(startingTile);
+        startingTile.timeStampPacman();
     }
 
     @Override
@@ -17,5 +18,17 @@ public class Pacman extends Entity {
 
     @Override
     public void meetPacman(Pacman pacman) {
+    }
+
+    @Override
+    public void setTile(Tile tile) {
+        super.setTile(tile);
+        tile.timeStampPacman();
+    }
+
+    @Override
+    public void die() {
+        super.die();
+        this.getTile().resetPacmanTimes();
     }
 }

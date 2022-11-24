@@ -5,7 +5,9 @@ import java.util.List;
 
 public class Game {
     public final List<Entity> pacmanList;
-    public final List<Entity> monsterList;
+    public final List<Entity> blinkyList;
+    public final List<Entity> pinkyList;
+    public final List<Entity> inkyList;
     public final List<Entity> dotList;
     public final TileMap map;
     public boolean active;
@@ -22,10 +24,12 @@ public class Game {
         this.pacmanList.add(new Pacman(this.map.getPacmanSpawn()));
         this.pacmanList.add(new Pacman(this.map.getPacmanSpawn()));
         this.pacmanList.add(new Pacman(this.map.getPacmanSpawn()));
-        this.monsterList = new ArrayList<>();
-        this.monsterList.add(new Monster(this.map.getMonsterSpawn()));
-        this.monsterList.add(new Monster(this.map.getMonsterSpawn()));
-        this.monsterList.add(new Monster(this.map.getMonsterSpawn()));
+        this.blinkyList = new ArrayList<>();
+        this.pinkyList = new ArrayList<>();
+        this.inkyList = new ArrayList<>();
+        this.blinkyList.add(new Monster(this.map.getMonsterSpawn()));
+        this.pinkyList.add(new Monster(this.map.getMonsterSpawn()));
+        this.inkyList.add(new Monster(this.map.getMonsterSpawn()));
         this.active = true;
     }
     

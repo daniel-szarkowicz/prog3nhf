@@ -9,31 +9,31 @@ import java.util.Map;
 public class GameController implements KeyListener {
     private final Game model;
 
-    private final List<PacmanController> pacmanList;
-    private final List<MonsterController> monsterList;
+    private final List<EntityController> entityList;
 
     public GameController(Game model, List<Map<Integer, PacmanCommand>> pacmanKeymaps) {
         this.model = model;
-        this.pacmanList = new ArrayList<>();
-        this.monsterList = new ArrayList<>();
+        this.entityList= new ArrayList<>();
         if (pacmanKeymaps.size() < this.model.pacmanList.size()) {
-            throw new RuntimeException("Túl kevés cucc!");
+            throw new RuntimeException("Túl kevés a cucc!");
         }
         for (int i = 0; i < this.model.pacmanList.size(); ++i) {
-            var pacman = new PacmanController(this.model.pacmanList.get(i), pacmanKeymaps.get(i));
-            this.pacmanList.add(pacman);
+            this.entityList.add(new PacmanController(this.model.pacmanList.get(i), pacmanKeymaps.get(i)));
         }
-        for (var monster : this.model.monsterList) {
-            this.monsterList.add(new MonsterController(monster));
+        for (var blinky : this.model.blinkyList) {
+            this.entityList.add(new BlinkyController(blinky));
+        }
+        for (var inky : this.model.inkyList) {
+            this.entityList.add(new MonsterController(inky));
+        }
+        for (var pinky : this.model.pinkyList) {
+        this.entityList.add(new PinkyController(pinky));
         }
     }
 
     public void tick(double delta) {
-        for (var pacman : this.pacmanList) {
-            pacman.tick(delta);
-        }
-        for (var monster : this.monsterList) {
-            monster.tick(delta);
+        for (var entity : this.entityList) {
+            entity.tick(delta);
         }
     }
 
@@ -42,8 +42,8 @@ public class GameController implements KeyListener {
         if (e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE) {
             this.model.active = false;
         }
-        for (var pacman : pacmanList) {
-            pacman.keyPressed(e);
+        for (var entity: entityList) {
+            entity.keyPressed(e);
         }
     }
 
