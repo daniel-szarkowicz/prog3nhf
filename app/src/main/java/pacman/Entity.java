@@ -95,6 +95,7 @@ public abstract class Entity implements Serializable {
     }
     
     public void respawn() {
+        this.respawn_timer = 0.0;
         this.tile.remove(this);
         this.tile = this.spawnTile;
         this.tile.add(this);
