@@ -9,10 +9,15 @@ public class MainMenu extends JPanel {
 
     public MainMenu() {
         var playButton = new JButton("play");
+        var loadButton = new JButton("load");
         var editorButton = new JButton("edit");
         var exitButton = new JButton("exit");
         playButton.addActionListener(e -> {
             action = MenuAction.PLAY;
+            active = false;
+        });
+        loadButton.addActionListener(e -> {
+            action = MenuAction.LOAD;
             active = false;
         });
         editorButton.addActionListener(e -> {
@@ -24,6 +29,7 @@ public class MainMenu extends JPanel {
             active = false;
         });
         this.add(playButton);
+        this.add(loadButton);
         this.add(editorButton);
         this.add(exitButton);
         this.active = true;

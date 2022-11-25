@@ -22,7 +22,10 @@ public class App {
             var action = mainMenu(window);
             switch (action) {
                 case PLAY:
-                    gameMain(window);
+                    playGame(window);
+                    break;
+                case LOAD:
+                    loadGame(window);
                     break;
                 case EDITOR:
                     mapEditorMain(window);
@@ -46,16 +49,39 @@ public class App {
         return panel.action;
     }
 
-    private static void gameMain(JFrame window) throws Throwable {
+    private static void playGame(JFrame window) throws Throwable {
         var map = TileMap.openFileChoose(window);
         if (map == null) {
-            map = new TileMap(20);
+            JOptionPane.showMessageDialog(window, "Failed to load map");
+            return;
         }
         Game model = new Game(map);
+        gameMain(window, model);
+    }
+
+    private static void loadGame(JFrame window) throws Throwable {
+        var game = Game.openFileChoose(window);
+        if (game == null) {
+            JOptionPane.showMessageDialog(window, "Failed to load game");
+            return;
+        }
+        gameMain(window, game);
+    }
+
+    private static void gameMain(JFrame window, Game model) throws Throwable {
         GameView view = new GameView(model, setupColors());
         GameController controller = new GameController(model, setupKeymaps());
 
         window.add(view);
+        var menubar = new JMenuBar();
+        var fileMenu = new JMenu("File");
+        var saveMenuItem = new JMenuItem("Save");
+        saveMenuItem.addActionListener(e -> {
+            Game.saveFileChoose(model, window);
+        });
+        fileMenu.add(saveMenuItem);
+        menubar.add(fileMenu);
+        window.setJMenuBar(menubar);
         view.addKeyListener(controller);
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
@@ -74,7 +100,7 @@ public class App {
         window.remove(view);
     }
 
-    private static void mapEditorMain(JFrame window) throws Throwable {
+    private static void mapEditorMain(JFrame window) throws InterruptedException {
         MapEditor model = new MapEditor();
         MapEditorView view = new MapEditorView(model);
         MapEditorController controller = new MapEditorController(model);
@@ -96,17 +122,25 @@ public class App {
         });
         newMenuItem.addActionListener(e -> {
             Integer width = null;
-            while (width == null) {
+            while (width == null || width < 5 || width > 50) {
                 var w = JOptionPane.showInputDialog("Map width:");
                 if (w != null) {
-                    width = Integer.parseInt(w);
+                    try {
+                        width = Integer.parseInt(w);
+                    } catch (NumberFormatException nemÉrdekelKivétel) {
+                        width = null;
+                    }
                 }
             }
             Integer height = null;
-            while (height == null) {
+            while (height == null || height < 5 || height > 50) {
                 var h = JOptionPane.showInputDialog("Map height:");
                 if (h != null) {
-                    height = Integer.parseInt(h);
+                    try {
+                        height = Integer.parseInt(h);
+                    } catch (NumberFormatException nemÉrdekelKivétel) {
+                        height = null;
+                    }
                 }
             }
             model.map.from(new TileMap(width, height));

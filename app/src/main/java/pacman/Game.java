@@ -1,10 +1,22 @@
 package pacman;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
-public class Game {
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+public class Game implements Serializable {
     public final List<Entity> pacmanList;
     public final List<Entity> blinkyList;
     public final List<Entity> pinkyList;
@@ -13,7 +25,7 @@ public class Game {
     public final List<Entity> largeDotList;
     public final TileMap map;
     public boolean active;
-    
+
     public Game() {
         this(new TileMap(20));
     }
@@ -35,7 +47,7 @@ public class Game {
         this.inkyList.add(new Monster(this.map.getMonsterSpawn()));
         this.active = true;
     }
-    
+
     public void populateMap() {
         var random = new Random();
         for (var tile : this.map) {
@@ -45,6 +57,46 @@ public class Game {
                 } else {
                     this.dotList.add(new Dot(tile));
                 }
+            }
+        }
+    }
+
+    public static boolean saveFileChoose(Game game, JFrame window) {
+        var fc = new JFileChooser(System.getProperty("user.dir"));
+        fc.setFileFilter(new FileNameExtensionFilter("Pac-Man game save (*.game)", "game"));
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.showSaveDialog(window);
+        var file = fc.getSelectedFile();
+        if (file == null) {
+            return false;
+        } else {
+            try {
+                var os = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream(file)));
+                os.writeObject(game);
+                os.close();
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
+        }
+    }
+
+    public static Game openFileChoose(JFrame window) {
+        var fc = new JFileChooser(System.getProperty("user.dir"));
+        fc.setFileFilter(new FileNameExtensionFilter("Pac-Man game save (*.game)", "game"));
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.showOpenDialog(window);
+        var file = fc.getSelectedFile();
+        if (file == null) {
+            return null;
+        } else {
+            try {
+                var is = new ObjectInputStream(new GZIPInputStream(new FileInputStream(file)));
+                var game = (Game) is.readObject();
+                is.close();
+                return game;
+            } catch (IOException | ClassNotFoundException e) {
+                return null;
             }
         }
     }

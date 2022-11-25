@@ -1,5 +1,6 @@
 package pacman;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.util.zip.GZIPOutputStream;
 import javax.annotation.Nullable;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class TileMap implements Iterable<Tile>, Serializable {
     private List<Tile> tiles;
@@ -92,6 +95,8 @@ public class TileMap implements Iterable<Tile>, Serializable {
 
     public static boolean saveFileChoose(TileMap map, JFrame window) {
         var fc = new JFileChooser(System.getProperty("user.dir"));
+        fc.setFileFilter(new FileNameExtensionFilter("Pac-Man map (*.map)", "map"));
+        fc.setAcceptAllFileFilterUsed(false);
         fc.showSaveDialog(window);
         var file = fc.getSelectedFile();
         if (file == null) {
@@ -110,6 +115,8 @@ public class TileMap implements Iterable<Tile>, Serializable {
 
     public static TileMap openFileChoose(JFrame window) {
         var fc = new JFileChooser(System.getProperty("user.dir"));
+        fc.setFileFilter(new FileNameExtensionFilter("Pac-Man map (*.map)", "map"));
+        fc.setAcceptAllFileFilterUsed(false);
         fc.showOpenDialog(window);
         var file = fc.getSelectedFile();
         if (file == null) {
