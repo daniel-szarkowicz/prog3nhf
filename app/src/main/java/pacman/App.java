@@ -76,10 +76,15 @@ public class App {
         var menubar = new JMenuBar();
         var fileMenu = new JMenu("File");
         var saveMenuItem = new JMenuItem("Save");
+        var exitMenuItem = new JMenuItem("Exit");
         saveMenuItem.addActionListener(e -> {
             Game.saveFileChoose(model, window);
         });
+        exitMenuItem.addActionListener(e -> {
+            model.active = false;
+        });
         fileMenu.add(saveMenuItem);
+        fileMenu.add(exitMenuItem);
         menubar.add(fileMenu);
         window.setJMenuBar(menubar);
         view.addKeyListener(controller);
@@ -98,6 +103,7 @@ public class App {
             // Thread.sleep(FRAME_TIME_TARGET);
         }
         window.remove(view);
+        window.setJMenuBar(null);
     }
 
     private static void mapEditorMain(JFrame window) throws InterruptedException {
@@ -111,6 +117,7 @@ public class App {
         var openMenuItem = new JMenuItem("Open");
         var saveMenuItem = new JMenuItem("Save");
         var newMenuItem = new JMenuItem("New");
+        var exitMenuItem = new JMenuItem("Exit");
         openMenuItem.addActionListener(e -> {
             var map = TileMap.openFileChoose(window);
             if (map != null) {
@@ -145,9 +152,11 @@ public class App {
             }
             model.map.from(new TileMap(width, height));
         });
+        exitMenuItem.addActionListener(e -> model.active = false);
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);
         fileMenu.add(newMenuItem);
+        fileMenu.add(exitMenuItem);
         menubar.add(fileMenu);
         var editMenu = new JMenu("Edit");
         var wallMenuItem = new JMenuItem("Wall");
