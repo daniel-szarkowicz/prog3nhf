@@ -55,6 +55,13 @@ public class TileMap implements Iterable<Tile>, Serializable {
         this.monsterSpawn = lastNotWall;
     }
 
+    /**
+     * Returns the tile at the given coordinates
+     * 
+     * @param x the X coordinate
+     * @param y the Y coordinate
+     * @returns the tile or null if the coordinates are out of bounds
+     */
     public @Nullable Tile getTile(int x, int y) {
         if (0 <= x && x < this.width && 0 <= y && y < this.height) {
             return tiles.get(y * this.width + x);
@@ -68,22 +75,49 @@ public class TileMap implements Iterable<Tile>, Serializable {
         return tiles.iterator();
     }
 
+    /**
+     * Returns the spawn point of the Pac-Man
+     * 
+     * @return the spawn tile of the Pac-Man
+     */
     public Tile getPacmanSpawn() {
         return this.pacmanSpawn;
     }
 
+    /**
+     * Sets the spawn point of the Pac-Man
+     * 
+     * @param pacmanSpawn the new spawn tile of the Pac-Man
+     */
     public void setPacmanSpawn(Tile pacmanSpawn) {
         this.pacmanSpawn = pacmanSpawn;
     }
 
+    /**
+     * Returns the spawn point of the monsters
+     * 
+     * @return the spawn tile of the monsters
+     */
     public Tile getMonsterSpawn() {
         return this.monsterSpawn;
     }
 
+    /**
+     * Sets the spawn point of the monsters
+     * 
+     * @param pacmanSpawn the new spawn tile of the monsters
+     */
     public void setMonsterSpawn(Tile monsterSpawn) {
         this.monsterSpawn = monsterSpawn;
     }
 
+    /**
+     * A helper function to save a map with a file chooser
+     * 
+     * @param map    the map to save
+     * @param window the parent of the file chooser
+     * @return whether the save was successful
+     */
     public static boolean saveFileChoose(TileMap map, JFrame window) {
         var fc = new JFileChooser(System.getProperty("user.dir"));
         fc.setFileFilter(new FileNameExtensionFilter("Pac-Man map (*.map)", "map"));
@@ -104,7 +138,13 @@ public class TileMap implements Iterable<Tile>, Serializable {
         }
     }
 
-    public static TileMap openFileChoose(JFrame window) {
+    /**
+     * A helper function to open a map with a file chooser
+     * 
+     * @param window the parent of the file chooser
+     * @return the loaded map or null if it was unsuccessful
+     */
+    public static @Nullable TileMap openFileChoose(JFrame window) {
         var fc = new JFileChooser(System.getProperty("user.dir"));
         fc.setFileFilter(new FileNameExtensionFilter("Pac-Man map (*.map)", "map"));
         fc.setAcceptAllFileFilterUsed(false);
@@ -123,7 +163,7 @@ public class TileMap implements Iterable<Tile>, Serializable {
             }
         }
     }
-    
+
     public List<Tile> getPacmanTiles() {
         var pacmanTiles = new ArrayList<Tile>();
         for (var pacman : this.pacmanList) {
