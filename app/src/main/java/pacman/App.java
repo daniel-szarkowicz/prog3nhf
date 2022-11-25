@@ -132,7 +132,8 @@ public class App {
         openMenuItem.addActionListener(e -> {
             var map = TileMap.openFileChoose(window);
             if (map != null) {
-                model.map.from(map);
+                model.map = map;
+                view.renewMap();
             }
         });
         saveMenuItem.addActionListener(e -> {
@@ -161,7 +162,8 @@ public class App {
                     }
                 }
             }
-            model.map.from(new TileMap(width, height));
+            model.map = new TileMap(width, height);
+            view.renewMap();
         });
         exitMenuItem.addActionListener(e -> model.active = false);
         fileMenu.add(openMenuItem);

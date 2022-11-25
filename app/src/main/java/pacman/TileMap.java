@@ -1,6 +1,5 @@
 package pacman;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,7 +16,6 @@ import java.util.zip.GZIPOutputStream;
 import javax.annotation.Nullable;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class TileMap implements Iterable<Tile>, Serializable {
@@ -41,7 +39,7 @@ public class TileMap implements Iterable<Tile>, Serializable {
         Tile lastNotWall = null;
         for (int y = 0; y < this.height; ++y) {
             for (int x = 0; x < this.width; ++x) {
-                var wall = rng.nextFloat() > 0.65 && x != 2 && x != this.width - 3 && y != 2 && y != this.width - 3;
+                var wall = rng.nextFloat() > 0.65 && x != 1 && x != this.width - 2 && y != 1 && y != this.width - 2;
                 var tile = new Tile(x, y, this, wall);
                 if (!wall) {
                     if (firstNotWall == null) {
@@ -68,14 +66,6 @@ public class TileMap implements Iterable<Tile>, Serializable {
     @Override
     public Iterator<Tile> iterator() {
         return tiles.iterator();
-    }
-
-    public void from(TileMap map) {
-        this.tiles = map.tiles;
-        this.width = map.width;
-        this.height = map.height;
-        this.pacmanSpawn = map.pacmanSpawn;
-        this.monsterSpawn = map.monsterSpawn;
     }
 
     public Tile getPacmanSpawn() {

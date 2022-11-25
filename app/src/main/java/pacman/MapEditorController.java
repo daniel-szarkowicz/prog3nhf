@@ -66,5 +66,4 @@ public class MapEditorController implements KeyListener, MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
     }
-
 }

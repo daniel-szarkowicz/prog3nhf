@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class MapEditorView extends JPanel {
     private final MapEditor model;
 
-    private final MapView map;
+    private MapView map;
 
     public MapEditorView(MapEditor model) {
         this.model = model;
@@ -33,5 +33,9 @@ public class MapEditorView extends JPanel {
         g.fillOval(monsterSpawn.getX() * MapView.TILE_SIZE,
                 monsterSpawn.getY() * MapView.TILE_SIZE,
                 MapView.TILE_SIZE, MapView.TILE_SIZE);
+    }
+    
+    public void renewMap() {
+        this.map = new MapView(this.model.map);
     }
 }
