@@ -2,6 +2,7 @@ package pacman;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Tile implements Serializable {
@@ -85,6 +86,42 @@ public class Tile implements Serializable {
             }
         }
         return nextDirection;
+    }
+    
+    public PathDirection getPathToClosestPacman() {
+        var frontier = new ArrayList<Tile>();
+        var directions = new HashMap<Tile, Direction>();
+        frontier.add(this);
+        directions.put(this, null);
+        Tile foundPacman = null;
+        while (!frontier.isEmpty()) {
+            var curr = frontier.remove(0);
+            if (this.map.getPacmanTiles().contains(curr)) {
+                foundPacman = curr;
+                break;
+            }
+            for (var d : Direction.values()) {
+                var neighbor = curr.getNeighbor(d);
+                if (neighbor != null && !neighbor.isWall()) {
+                    if (!directions.containsKey(neighbor)) {
+                        frontier.add(neighbor);
+                        directions.put(neighbor, d);
+                    }
+                }
+            }
+        }
+        if (foundPacman != null) {
+            var dir = Direction.UP;
+            var len = 0;
+            var current = foundPacman;
+            while (current != this) {
+                len += 1;
+                dir = directions.get(current);
+                current = current.getNeighbor(dir.opposite());
+            }
+            return new PathDirection(len, dir);
+        }
+        return null;
     }
     
     public void resetPacmanTimes() {

@@ -55,7 +55,18 @@ public class App {
             JOptionPane.showMessageDialog(window, "Failed to load map");
             return;
         }
-        Game model = new Game(map);
+        Integer pacmanCount = null;
+        while (pacmanCount == null || pacmanCount < 1 || pacmanCount > 4) {
+            var p = JOptionPane.showInputDialog("Pacman count:");
+            if (p != null) {
+                try {
+                    pacmanCount = Integer.parseInt(p);
+                } catch (NumberFormatException nemÉrdekelKivétel) {
+                    pacmanCount = null;
+                }
+            }
+        }
+        Game model = new Game(map, pacmanCount);
         gameMain(window, model);
     }
 
@@ -195,7 +206,8 @@ public class App {
         var colors = new ArrayList<Color>();
         colors.add(Color.YELLOW);
         colors.add(Color.GREEN);
-        colors.add(Color.PINK);
+        colors.add(Color.MAGENTA);
+        colors.add(Color.CYAN);
 
         return colors;
     }
@@ -213,14 +225,20 @@ public class App {
         keymap2.put(KeyEvent.VK_LEFT, PacmanCommand.TURN_LEFT);
         keymap2.put(KeyEvent.VK_RIGHT, PacmanCommand.TURN_RIGHT);
         var keymap3 = new HashMap<Integer, PacmanCommand>();
-        keymap3.put(KeyEvent.VK_K, PacmanCommand.TURN_UP);
-        keymap3.put(KeyEvent.VK_J, PacmanCommand.TURN_DOWN);
-        keymap3.put(KeyEvent.VK_H, PacmanCommand.TURN_LEFT);
+        keymap3.put(KeyEvent.VK_I, PacmanCommand.TURN_UP);
+        keymap3.put(KeyEvent.VK_K, PacmanCommand.TURN_DOWN);
+        keymap3.put(KeyEvent.VK_J, PacmanCommand.TURN_LEFT);
         keymap3.put(KeyEvent.VK_L, PacmanCommand.TURN_RIGHT);
+        var keymap4 = new HashMap<Integer, PacmanCommand>();
+        keymap4.put(KeyEvent.VK_T, PacmanCommand.TURN_UP);
+        keymap4.put(KeyEvent.VK_G, PacmanCommand.TURN_DOWN);
+        keymap4.put(KeyEvent.VK_F, PacmanCommand.TURN_LEFT);
+        keymap4.put(KeyEvent.VK_H, PacmanCommand.TURN_RIGHT);
 
         keymaps.add(keymap1);
         keymaps.add(keymap2);
         keymaps.add(keymap3);
+        keymaps.add(keymap4);
 
         return keymaps;
     }

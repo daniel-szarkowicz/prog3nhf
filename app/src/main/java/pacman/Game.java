@@ -21,30 +21,34 @@ public class Game implements Serializable {
     public final List<Entity> blinkyList;
     public final List<Entity> pinkyList;
     public final List<Entity> inkyList;
+    public final List<Entity> clydeList;
     public final List<Entity> dotList;
     public final List<Entity> largeDotList;
     public final TileMap map;
     public boolean active;
 
     public Game() {
-        this(new TileMap(20));
+        this(new TileMap(20), 1);
     }
 
-    public Game(TileMap map) {
+    public Game(TileMap map, int pacmanCount) {
         this.map = map;
         this.dotList = new ArrayList<>();
         this.largeDotList = new ArrayList<>();
         this.populateMap();
         this.pacmanList = new ArrayList<>();
-        this.pacmanList.add(new Pacman(this.map.getPacmanSpawn()));
-        this.pacmanList.add(new Pacman(this.map.getPacmanSpawn()));
-        this.pacmanList.add(new Pacman(this.map.getPacmanSpawn()));
+        for (int i = 0; i < pacmanCount; ++i) {
+            this.pacmanList.add(new Pacman(this.map.getPacmanSpawn()));
+        }
+        this.map.pacmanList = this.pacmanList;
         this.blinkyList = new ArrayList<>();
         this.pinkyList = new ArrayList<>();
         this.inkyList = new ArrayList<>();
+        this.clydeList = new ArrayList<>();
         this.blinkyList.add(new Monster(this.map.getMonsterSpawn()));
         this.pinkyList.add(new Monster(this.map.getMonsterSpawn()));
         this.inkyList.add(new Monster(this.map.getMonsterSpawn()));
+        this.clydeList.add(new Monster(this.map.getMonsterSpawn()));
         this.active = true;
     }
 

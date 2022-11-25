@@ -26,6 +26,7 @@ public class TileMap implements Iterable<Tile>, Serializable {
     private int height;
     public Tile pacmanSpawn;
     public Tile monsterSpawn;
+    public List<Entity> pacmanList;
 
     public TileMap(int size) {
         this(size, size);
@@ -131,5 +132,15 @@ public class TileMap implements Iterable<Tile>, Serializable {
                 return null;
             }
         }
+    }
+    
+    public List<Tile> getPacmanTiles() {
+        var pacmanTiles = new ArrayList<Tile>();
+        for (var pacman : this.pacmanList) {
+            if (!pacman.isDead()) {
+                pacmanTiles.add(pacman.getTile());
+            }
+        }
+        return pacmanTiles;
     }
 }

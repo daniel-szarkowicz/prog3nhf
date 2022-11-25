@@ -27,7 +27,10 @@ public class GameController implements KeyListener {
             this.entityList.add(new MonsterController(inky));
         }
         for (var pinky : this.model.pinkyList) {
-        this.entityList.add(new PinkyController(pinky));
+            this.entityList.add(new PinkyController(pinky));
+        }
+        for (var clyde : this.model.clydeList) {
+            this.entityList.add(new ClydeController(clyde));
         }
     }
 

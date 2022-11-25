@@ -1,22 +1,23 @@
 package pacman;
 
-public class PinkyController extends EntityController {
-    public PinkyController(Entity model) {
+public class ClydeController extends EntityController {
+    public ClydeController(Entity model) {
         super(model);
     }
 
     @Override
     public void control(double delta, Entity model) {
         var pathToPacman = model.getTile().getPathToClosestPacman();
-        if (pathToPacman != null) {
+        if (pathToPacman != null && pathToPacman.length < 5) {
             model.setNextDirection(pathToPacman.direction);
+            model.move(2.0, delta);
         }
         else {
             if ((!model.isMoving() && MonsterController.RANDOM.nextFloat() < delta*10) || MonsterController.RANDOM.nextFloat() < delta) {
                 var nextDirection = Direction.values()[MonsterController.RANDOM.nextInt(4)];
                 model.setNextDirection(nextDirection);
             }
+            model.move(3.0, delta);
         }
-        model.move(2.0, delta);
     }
 }

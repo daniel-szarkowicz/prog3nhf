@@ -39,6 +39,9 @@ public class GameView extends JPanel {
         for (var pinky: this.model.pinkyList) {
             this.entityList.add(new MonsterView(pinky, Color.PINK));
         }
+        for (var clyde: this.model.clydeList) {
+            this.entityList.add(new MonsterView(clyde, Color.ORANGE));
+        }
         this.map = new MapView(this.model.map);
     }
 
