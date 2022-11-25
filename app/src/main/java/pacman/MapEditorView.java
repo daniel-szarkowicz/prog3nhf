@@ -35,6 +35,9 @@ public class MapEditorView extends JPanel {
                 MapView.TILE_SIZE, MapView.TILE_SIZE);
     }
     
+    /**
+    Renews the {@link MapView} when the map changed
+    */
     public void renewMap() {
         this.map = new MapView(this.model.map);
     }

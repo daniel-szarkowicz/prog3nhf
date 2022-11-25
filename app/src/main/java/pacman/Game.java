@@ -12,6 +12,7 @@ import java.util.Random;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import javax.annotation.Nullable;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -52,6 +53,9 @@ public class Game implements Serializable {
         this.active = true;
     }
 
+    /**
+     * Places the dots on the map
+     */
     public void populateMap() {
         var random = new Random();
         for (var tile : this.map) {
@@ -65,6 +69,13 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * A helper function to save a game with a file chooser
+     * 
+     * @param game   the game to save
+     * @param window the parent of the file chooser
+     * @return whether the save was successful
+     */
     public static boolean saveFileChoose(Game game, JFrame window) {
         var fc = new JFileChooser(System.getProperty("user.dir"));
         fc.setFileFilter(new FileNameExtensionFilter("Pac-Man game save (*.game)", "game"));
@@ -85,7 +96,13 @@ public class Game implements Serializable {
         }
     }
 
-    public static Game openFileChoose(JFrame window) {
+    /**
+     * A helper function to open a game with a file chooser
+     * 
+     * @param window the parent of the file chooser
+     * @return the loaded game or null if it was unsuccessful
+     */
+    public static @Nullable Game openFileChoose(JFrame window) {
         var fc = new JFileChooser(System.getProperty("user.dir"));
         fc.setFileFilter(new FileNameExtensionFilter("Pac-Man game save (*.game)", "game"));
         fc.setAcceptAllFileFilterUsed(false);

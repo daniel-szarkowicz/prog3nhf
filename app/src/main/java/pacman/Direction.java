@@ -16,6 +16,11 @@ public enum Direction {
         this.angle = angle;
     }
 
+    /**
+     * Returns the opposite of a direction
+     * 
+     * @return the opposite direction
+     */
     public Direction opposite() {
         switch (this) {
             case UP:
