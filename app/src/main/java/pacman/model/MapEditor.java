@@ -1,4 +1,4 @@
-package pacman;
+package pacman.model;
 
 public class MapEditor {
     public TileMap map;

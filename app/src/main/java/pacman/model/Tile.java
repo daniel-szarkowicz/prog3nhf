@@ -1,4 +1,4 @@
-package pacman;
+package pacman.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Nullable;
+
+import pacman.Direction;
+import pacman.PathDirection;
 
 public class Tile implements Serializable {
     private final int x;

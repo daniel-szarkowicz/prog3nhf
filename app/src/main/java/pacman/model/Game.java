@@ -1,4 +1,4 @@
-package pacman;
+package pacman.model;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

@@ -1,5 +1,7 @@
 package pacman;
 
+import pacman.model.Entity;
+
 public interface PacmanCommand {
     public static final PacmanCommand TURN_UP = model -> model.setNextDirection(Direction.UP);
     public static final PacmanCommand TURN_DOWN = model -> model.setNextDirection(Direction.DOWN);

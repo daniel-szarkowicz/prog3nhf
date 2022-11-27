@@ -12,6 +12,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import pacman.controller.GameController;
+import pacman.controller.MapEditorController;
+import pacman.model.Game;
+import pacman.model.MapEditor;
+import pacman.model.TileMap;
+import pacman.view.GameView;
+import pacman.view.MapEditorView;
+
 public class App {
     public static final long FRAME_TIME_TARGET = 1000 / 100;
 

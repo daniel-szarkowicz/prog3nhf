@@ -9,6 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import org.junit.Test;
 
+import pacman.model.Game;
+import pacman.model.TileMap;
+
 public class SerializableTest {
     @Test
     public void Map_is_serializable() throws Throwable {

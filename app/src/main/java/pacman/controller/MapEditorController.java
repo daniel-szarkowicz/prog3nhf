@@ -1,9 +1,13 @@
-package pacman;
+package pacman.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import pacman.MapEditorMode;
+import pacman.model.MapEditor;
+import pacman.view.MapView;
 
 public class MapEditorController implements KeyListener, MouseListener {
     private final MapEditor model;

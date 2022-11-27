@@ -1,7 +1,10 @@
-package pacman;
+package pacman.view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+
+import pacman.model.Entity;
+import pacman.model.Pacman;
 
 public class PacmanView extends EntityView {
     private static final int MOUTH_ANGLE = 40;

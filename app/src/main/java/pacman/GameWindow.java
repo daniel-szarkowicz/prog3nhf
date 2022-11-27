@@ -2,6 +2,8 @@ package pacman;
 
 import javax.swing.JFrame;
 
+import pacman.view.MapView;
+
 public class GameWindow extends JFrame {
     public GameWindow() {
         super("Pac-Man");

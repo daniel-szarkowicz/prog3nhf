@@ -1,6 +1,8 @@
-package pacman;
+package pacman.controller;
 
 import java.awt.event.KeyEvent;
+
+import pacman.model.Entity;
 
 public abstract class EntityController {
     private final Entity model;

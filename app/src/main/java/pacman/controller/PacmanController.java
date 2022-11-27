@@ -1,7 +1,10 @@
-package pacman;
+package pacman.controller;
 
 import java.awt.event.KeyEvent;
 import java.util.Map;
+
+import pacman.PacmanCommand;
+import pacman.model.Entity;
 
 public class PacmanController extends EntityController {
     private final Map<Integer, PacmanCommand> keymap;

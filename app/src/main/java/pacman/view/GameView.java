@@ -1,4 +1,4 @@
-package pacman;
+package pacman.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+
+import pacman.model.Game;
 
 public class GameView extends JPanel {
     private final Game model;

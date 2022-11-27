@@ -1,7 +1,9 @@
-package pacman;
+package pacman.view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+
+import pacman.model.Entity;
 
 public class MonsterView extends EntityView {
     private final Color color;

@@ -1,4 +1,4 @@
-package pacman;
+package pacman.model;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -60,7 +60,7 @@ public class TileMap implements Iterable<Tile>, Serializable {
      * 
      * @param x the X coordinate
      * @param y the Y coordinate
-     * @returns the tile or null if the coordinates are out of bounds
+     * @return the tile or null if the coordinates are out of bounds
      */
     public @Nullable Tile getTile(int x, int y) {
         if (0 <= x && x < this.width && 0 <= y && y < this.height) {
@@ -105,7 +105,7 @@ public class TileMap implements Iterable<Tile>, Serializable {
     /**
      * Sets the spawn point of the monsters
      * 
-     * @param pacmanSpawn the new spawn tile of the monsters
+     * @param monsterSpawn the new spawn tile of the monsters
      */
     public void setMonsterSpawn(Tile monsterSpawn) {
         this.monsterSpawn = monsterSpawn;

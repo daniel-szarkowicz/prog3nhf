@@ -1,10 +1,13 @@
-package pacman;
+package pacman.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import pacman.PacmanCommand;
+import pacman.model.Game;
 
 public class GameController implements KeyListener {
     private final Game model;

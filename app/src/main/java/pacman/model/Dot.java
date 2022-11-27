@@ -1,4 +1,4 @@
-package pacman;
+package pacman.model;
 
 public class Dot extends Entity {
     public Dot(Tile startingTile) {

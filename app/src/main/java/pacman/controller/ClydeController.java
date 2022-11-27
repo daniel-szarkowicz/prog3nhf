@@ -1,4 +1,7 @@
-package pacman;
+package pacman.controller;
+
+import pacman.Direction;
+import pacman.model.Entity;
 
 public class ClydeController extends EntityController {
     public ClydeController(Entity model) {

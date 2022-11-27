@@ -1,4 +1,7 @@
-package pacman;
+package pacman.controller;
+
+import pacman.Direction;
+import pacman.model.Entity;
 
 public class PinkyController extends EntityController {
     public PinkyController(Entity model) {

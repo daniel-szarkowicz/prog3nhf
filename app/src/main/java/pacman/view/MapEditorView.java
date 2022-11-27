@@ -1,10 +1,12 @@
-package pacman;
+package pacman.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
+
+import pacman.model.MapEditor;
 
 public class MapEditorView extends JPanel {
     private final MapEditor model;

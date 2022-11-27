@@ -1,4 +1,4 @@
-package pacman;
+package pacman.model;
 
 public class Pacman extends Entity {
     private double strong_timer;

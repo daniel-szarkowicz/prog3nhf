@@ -1,6 +1,8 @@
-package pacman;
+package pacman.model;
 
 import java.io.Serializable;
+
+import pacman.Direction;
 
 public abstract class Entity implements Serializable {
     private Direction direction;

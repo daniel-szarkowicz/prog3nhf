@@ -1,4 +1,4 @@
-package pacman;
+package pacman.model;
 
 public class Monster extends Entity {
     public Monster(Tile startingTile) {

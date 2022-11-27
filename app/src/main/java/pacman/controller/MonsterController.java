@@ -1,6 +1,9 @@
-package pacman;
+package pacman.controller;
 
 import java.util.Random;
+
+import pacman.Direction;
+import pacman.model.Entity;
 
 public class MonsterController extends EntityController {
     public static final Random RANDOM;

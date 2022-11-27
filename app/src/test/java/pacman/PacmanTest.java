@@ -5,6 +5,11 @@ import static org.junit.Assume.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import pacman.model.LargeDot;
+import pacman.model.Monster;
+import pacman.model.Pacman;
+import pacman.model.TileMap;
+
 public class PacmanTest {
     TileMap map;
     Pacman pacman;

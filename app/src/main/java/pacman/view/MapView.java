@@ -1,7 +1,10 @@
-package pacman;
+package pacman.view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+
+import pacman.Direction;
+import pacman.model.TileMap;
 
 public class MapView {
     public static final int TILE_SIZE = 50;
