@@ -9,6 +9,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'com.exploids.plantumlfromsource' version '0.1.2'
 }
 
 repositories {
@@ -33,4 +34,13 @@ jar {
     manifest {
         attributes 'Main-Class': 'pacman.App'
     }
+}
+
+classDiagram {
+    sourceSet = sourceSets.main
+    outputFile = project.file('build/diagrams/main.plantuml')
+    visibility = "package private"
+    associationFieldVisibility = "private"
+    associationMethodVisibility = null
+    before = "skinparam shadowing false"
 }
