@@ -39,12 +39,16 @@ public class MapEditorController implements KeyListener, MouseListener {
                     tile.setWall(!tile.isWall());
                     break;
                 case PACMAN_SPAWN:
-                    if (!tile.isWall())
+                    if (!tile.isWall()) {
                         this.model.map.setPacmanSpawn(tile);
+                        this.mode = MapEditorMode.WALL;
+                    }
                     break;
                 case MONSTER_SPAWN:
-                    if (!tile.isWall())
+                    if (!tile.isWall()) {
                         this.model.map.setMonsterSpawn(tile);
+                        this.mode = MapEditorMode.WALL;
+                    }
                     break;
             }
         }

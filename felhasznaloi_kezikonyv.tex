@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{parskip}
+
+\title{Pac-Man felhasználói kézikönyv}
+\author{Szarkowicz Dániel - FK0IEH}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Főmenü}
+
+A főmenüben négy gomb van: Play, Load, Edit és Exit.
+
+A Play gombra nyomva lehet kiválasztani egy pályát, majd a játékosok számát.\\
+A Load gombra nyomva lehet betölteni egy előzőleg kimentett játékot.\\
+Az Edit gombra nyomva lehet megnyitni a pályaszerkesztőt.\\
+Az Exit gombra nyomva lehet kilépni a játékból.
+
+\section{Játék}
+
+A játékosok irányítják a Pac-Man-eket, a céljuk a szörnyek elkerülése és a
+pontok összegyűjtése. Négy szörny van: Inky (kék), Clyde (narancssárga),
+Blinky (piros) és Pinky (pink).
+
+Inky teljesen véletlenszerűen mozog a labirintusban.\\
+Clyde véletlenszerűen mozog a labirintusban, de ha egy Pac-Man közel kerül
+hozzá, akkor elkezdi üldözni.\\
+Blinky az útjukon követi a Pac-Man-eket. Mindig a legfrissebb úton halad,
+amíg nem talál egy utat, addig véletlenszerűen mozog.\\
+Pinky a legrövidebb úton üldözi a Pac-Man-eket.
+
+A pályán kisebb és nagyobb pontok vannak. A nagyobb pontok 5 másodpercre
+felerősítik azt a Pac-Man-t amelyik megette, az erősebb Pac-Man gyorsabban
+mozog és meg tudja enni a szörnyeket.
+
+Az ablak tetején egy menü található.\\
+A File > Save opcióval lehet kimenteni a játék jelenlegi állapotát.\\
+A File > Exit opcióval lehet kilépni a főmenübe.
+
+\section{Pályaszerkesztő}
+
+A pályaszerkesztővel lehet új pályákat készíten, vagy régebbi pályákat
+módosítani.
+
+A File > Open opcióval lehet egy pályát megnyitni.\\
+A File > Save opcióval lehet a jelenlegi pályát kimenteni.\\
+A File > New opcióval lehet egy új pályát készíteni, ekkor ki lehet választani
+a pálya szélességét és magasságát.\\
+A File > Exit opcióval lehet kilépni a főmenübe.
+
+Az Edit > Wall opcióval lehet a falakat ki vagy be kapcsolni.\\
+Az Edit > Pacman Spawn opcióval lehet a Pac-Man-ek kezdőhelyét módosítani.\\
+Az Edit > Monster Spawn opcióval lehet a szörnyek kezdőhelyét módosítani.\\
+A két fél kezdőhelye nem lehet a falakon és ugyan azon a helyen.
+
+\end{document}

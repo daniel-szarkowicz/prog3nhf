@@ -8,10 +8,10 @@ public class MainMenu extends JPanel {
     public MenuAction action;
 
     public MainMenu() {
-        var playButton = new JButton("play");
-        var loadButton = new JButton("load");
-        var editorButton = new JButton("edit");
-        var exitButton = new JButton("exit");
+        var playButton = new JButton("Play");
+        var loadButton = new JButton("Load");
+        var editorButton = new JButton("Edit");
+        var exitButton = new JButton("Exit");
         playButton.addActionListener(e -> {
             action = MenuAction.PLAY;
             active = false;
