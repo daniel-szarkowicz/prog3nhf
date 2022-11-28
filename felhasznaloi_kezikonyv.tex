@@ -2,6 +2,14 @@
 
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage{parskip}
+\usepackage[hungarian]{babel}
+\usepackage{hyperref}
+\usepackage{tabularray}
+
+\hypersetup{
+	colorlinks,
+	linkcolor=blue
+}
 
 \title{Pac-Man felhasználói kézikönyv}
 \author{Szarkowicz Dániel - FK0IEH}
@@ -15,46 +23,65 @@
 
 A főmenüben négy gomb van: Play, Load, Edit és Exit.
 
-A Play gombra nyomva lehet kiválasztani egy pályát, majd a játékosok számát.\\
-A Load gombra nyomva lehet betölteni egy előzőleg kimentett játékot.\\
-Az Edit gombra nyomva lehet megnyitni a pályaszerkesztőt.\\
-Az Exit gombra nyomva lehet kilépni a játékból.
+A \textbf{Play} gombra nyomva lehet kiválasztani egy pályát, majd a játékosok számát.\\
+A \textbf{Load} gombra nyomva lehet betölteni egy előzőleg kimentett játékot.\\
+Az \textbf{Edit} gombra nyomva lehet megnyitni a pályaszerkesztőt.\\
+Az \textbf{Exit} gombra nyomva lehet kilépni a játékból.
 
 \section{Játék}
 
-A játékosok irányítják a Pac-Man-eket, a céljuk a szörnyek elkerülése és a
-pontok összegyűjtése. Négy szörny van: Inky (kék), Clyde (narancssárga),
-Blinky (piros) és Pinky (pink).
+A játékosok \hyperref[appendix:controls]{irányítják} a Pac-Man-eket, a céljuk
+a szörnyek elkerülése és a pontok összegyűjtése.
+Négy szörny van: Inky (kék), Clyde (narancssárga), Blinky (piros) és Pinky (rózsaszín).
 
-Inky teljesen véletlenszerűen mozog a labirintusban.\\
-Clyde véletlenszerűen mozog a labirintusban, de ha egy Pac-Man közel kerül
+\textit{Inky} teljesen véletlenszerűen mozog a labirintusban.\\
+\textit{Clyde} véletlenszerűen mozog a labirintusban, de ha egy Pac-Man közel kerül
 hozzá, akkor elkezdi üldözni.\\
-Blinky az útjukon követi a Pac-Man-eket. Mindig a legfrissebb úton halad,
+\textit{Blinky} az útjukon követi a Pac-Man-eket. Mindig a legfrissebb úton halad,
 amíg nem talál egy utat, addig véletlenszerűen mozog.\\
-Pinky a legrövidebb úton üldözi a Pac-Man-eket.
+\textit{Pinky} a legrövidebb úton üldözi a Pac-Man-eket.
 
 A pályán kisebb és nagyobb pontok vannak. A nagyobb pontok 5 másodpercre
 felerősítik azt a Pac-Man-t amelyik megette, az erősebb Pac-Man gyorsabban
 mozog és meg tudja enni a szörnyeket.
 
 Az ablak tetején egy menü található.\\
-A File > Save opcióval lehet kimenteni a játék jelenlegi állapotát.\\
-A File > Exit opcióval lehet kilépni a főmenübe.
+A \textbf{File > Save} opcióval lehet kimenteni a játék jelenlegi állapotát.\\
+A \textbf{File > Exit} opcióval lehet kilépni a főmenübe.
 
 \section{Pályaszerkesztő}
 
 A pályaszerkesztővel lehet új pályákat készíten, vagy régebbi pályákat
 módosítani.
 
-A File > Open opcióval lehet egy pályát megnyitni.\\
-A File > Save opcióval lehet a jelenlegi pályát kimenteni.\\
-A File > New opcióval lehet egy új pályát készíteni, ekkor ki lehet választani
+A \textbf{File > Open} opcióval lehet egy pályát megnyitni.\\
+A \textbf{File > Save} opcióval lehet a jelenlegi pályát kimenteni.\\
+A \textbf{File > New} opcióval lehet egy új pályát készíteni, ekkor ki lehet választani
 a pálya szélességét és magasságát.\\
-A File > Exit opcióval lehet kilépni a főmenübe.
+A \textbf{File > Exit} opcióval lehet kilépni a főmenübe.
 
-Az Edit > Wall opcióval lehet a falakat ki vagy be kapcsolni.\\
-Az Edit > Pacman Spawn opcióval lehet a Pac-Man-ek kezdőhelyét módosítani.\\
-Az Edit > Monster Spawn opcióval lehet a szörnyek kezdőhelyét módosítani.\\
+Az \textbf{Edit > Wall} opcióval lehet a falakat ki vagy be kapcsolni.\\
+Az \textbf{Edit > Pacman Spawn} opcióval lehet a Pac-Man-ek kezdőhelyét módosítani.\\
+Az \textbf{Edit > Monster Spawn} opcióval lehet a szörnyek kezdőhelyét módosítani.\\
 A két fél kezdőhelye nem lehet a falakon és ugyan azon a helyen.
+
+\newpage
+\appendix
+
+\section{Pac-Man irányítása}\label{appendix:controls}
+
+Pac-Man négy irányba mozoghat: fel, le, jobbra és balra. Pac-Man a következő
+lehetséges ponton fog elfordulni a megadott irányba, addig a jelenlegi
+iránya szerint fog tovább mozogni.
+
+A játékosok különböző billentyűkkel irányítják a Pac-Man-eket:
+
+\begin{tblr}{hlines, vlines, row{1}={cmd=\textbf}, column{1}={cmd=\textbf}}
+Játékos & szín    & fel        & le           & jobbra        & balra       \\
+1.      & sárga   & W          & S            & D             & A           \\
+2.      & zöld    & $\uparrow$ & $\downarrow$ & $\rightarrow$ & $\leftarrow$\\
+3.      & magenta & I          & K            & L             & J           \\
+4.      & türkiz  & T          & G            & H             & F           \\
+\end{tblr}
 
 \end{document}
