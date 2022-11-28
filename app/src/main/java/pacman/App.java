@@ -46,7 +46,13 @@ public class App {
         }
     }
 
-    private static MenuAction mainMenu(JFrame window) throws InterruptedException {
+    /**
+     * Show the main menu
+     * 
+     * @param window the window to show the main menu on
+     * @return which action the user choose in the menu
+     */
+    public static MenuAction mainMenu(JFrame window) throws InterruptedException {
         var panel = new MainMenu();
         window.add(panel);
         window.setVisible(true);
@@ -57,7 +63,12 @@ public class App {
         return panel.action;
     }
 
-    private static void playGame(JFrame window) throws Throwable {
+    /**
+     * Start a new game with a selectec map and pacman count
+     * 
+     * @param window the window to show the game on
+     */
+    public static void playGame(JFrame window) throws Throwable {
         var map = TileMap.openFileChoose(window);
         if (map == null) {
             JOptionPane.showMessageDialog(window, "Failed to load map");
@@ -78,7 +89,12 @@ public class App {
         gameMain(window, model);
     }
 
-    private static void loadGame(JFrame window) throws Throwable {
+    /**
+     * Load an existing game from disk
+     * 
+     * @param window the window to show the game on
+     */
+    public static void loadGame(JFrame window) throws Throwable {
         var game = Game.openFileChoose(window);
         if (game == null) {
             JOptionPane.showMessageDialog(window, "Failed to load game");
@@ -87,7 +103,13 @@ public class App {
         gameMain(window, game);
     }
 
-    private static void gameMain(JFrame window, Game model) throws Throwable {
+    /**
+     * Play the given game
+     * 
+     * @param window the window to show the game on
+     * @param model  the game to play
+     */
+    public static void gameMain(JFrame window, Game model) throws Throwable {
         GameView view = new GameView(model, setupColors());
         GameController controller = new GameController(model, setupKeymaps());
 
@@ -125,7 +147,12 @@ public class App {
         window.setJMenuBar(null);
     }
 
-    private static void mapEditorMain(JFrame window) throws InterruptedException {
+    /**
+     * Show the map editor
+     * 
+     * @param window the window to show the map editor on
+     */
+    public static void mapEditorMain(JFrame window) throws InterruptedException {
         MapEditor model = new MapEditor();
         MapEditorView view = new MapEditorView(model);
         MapEditorController controller = new MapEditorController(model);
@@ -212,6 +239,11 @@ public class App {
         window.setJMenuBar(null);
     }
 
+    /**
+     * Generates the colors for the Pac-Man
+     * 
+     * @return colors for the Pac-Man
+     */
     private static List<Color> setupColors() {
         var colors = new ArrayList<Color>();
         colors.add(Color.YELLOW);
@@ -222,6 +254,11 @@ public class App {
         return colors;
     }
 
+    /**
+     * Generates the keymaps for the Pac-Man
+     * 
+     * @return keymaps for the Pac-Man
+     */
     private static List<Map<Integer, PacmanCommand>> setupKeymaps() {
         var keymaps = new ArrayList<Map<Integer, PacmanCommand>>();
         var keymap1 = new HashMap<Integer, PacmanCommand>();

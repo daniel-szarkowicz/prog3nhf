@@ -4,6 +4,12 @@ import javax.swing.JFrame;
 
 import pacman.view.MapView;
 
+/**
+ * The window of the application
+ * <p>
+ * This class is essentially useless, because it is only used once and the
+ * constructor doesn't do anything diffucult either
+ */
 public class GameWindow extends JFrame {
     public GameWindow() {
         super("Pac-Man");

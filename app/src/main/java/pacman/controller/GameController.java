@@ -9,14 +9,23 @@ import java.util.Map;
 import pacman.PacmanCommand;
 import pacman.model.Game;
 
+/**
+ * The main controller of the game
+ */
 public class GameController implements KeyListener {
     private final Game model;
 
     private final List<EntityController> entityList;
 
+    /**
+     * Creates a game controller for the game model
+     * 
+     * @param model         the model to control
+     * @param pacmanKeymaps the keyMaps for the Pac-Man
+     */
     public GameController(Game model, List<Map<Integer, PacmanCommand>> pacmanKeymaps) {
         this.model = model;
-        this.entityList= new ArrayList<>();
+        this.entityList = new ArrayList<>();
         if (pacmanKeymaps.size() < this.model.pacmanList.size()) {
             throw new RuntimeException("Túl kevés a cucc!");
         }
@@ -37,6 +46,11 @@ public class GameController implements KeyListener {
         }
     }
 
+    /**
+     * Updates the controllers
+     * 
+     * @param delta the change in time
+     */
     public void tick(double delta) {
         for (var entity : this.entityList) {
             entity.tick(delta);
@@ -48,7 +62,7 @@ public class GameController implements KeyListener {
         if (e.getExtendedKeyCode() == KeyEvent.VK_ESCAPE) {
             this.model.active = false;
         }
-        for (var entity: entityList) {
+        for (var entity : entityList) {
             entity.keyPressed(e);
         }
     }

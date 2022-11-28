@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import pacman.Direction;
 
+/**
+ * The abstract baseclass for all entity models
+ */
 public abstract class Entity implements Serializable {
     private Direction direction;
     private Direction nextDirection;

@@ -4,9 +4,17 @@ import java.awt.event.KeyEvent;
 
 import pacman.model.Entity;
 
+/**
+ * The abstract baseclass for all entity controllers
+ */
 public abstract class EntityController {
     private final Entity model;
 
+    /**
+     * Create an entity controller for the given model
+     * 
+     * @param model the model to control
+     */
     public EntityController(Entity model) {
         this.model = model;
     }

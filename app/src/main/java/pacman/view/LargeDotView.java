@@ -5,8 +5,14 @@ import java.awt.Graphics2D;
 
 import pacman.model.Entity;
 
+/**
+ * The view for a large dot
+ */
 public class LargeDotView extends EntityView {
 
+    /**
+     * @param model the model to view
+     */
     public LargeDotView(Entity model) {
         super(model);
     }

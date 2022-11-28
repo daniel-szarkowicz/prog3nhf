@@ -10,6 +10,9 @@ import javax.annotation.Nullable;
 import pacman.Direction;
 import pacman.PathDirection;
 
+/**
+ * The tile the map is made up from
+ */
 public class Tile implements Serializable {
     private final int x;
     private final int y;
@@ -18,6 +21,14 @@ public class Tile implements Serializable {
     private final List<Entity> entities;
     private long pacmanTime;
 
+    /**
+     * Create a tile at the give position
+     * 
+     * @param x    the X coordinate of the tile
+     * @param y    the Y coordinate of the tile
+     * @param map  the map the tile is in
+     * @param wall whether the tile is a wall
+     */
     public Tile(int x, int y, TileMap map, boolean wall) {
         this.x = x;
         this.y = y;

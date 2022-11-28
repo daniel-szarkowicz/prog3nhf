@@ -17,6 +17,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * The main model of the game
+ */
 public class Game implements Serializable {
     public final List<Entity> pacmanList;
     public final List<Entity> blinkyList;
@@ -28,10 +31,19 @@ public class Game implements Serializable {
     public final TileMap map;
     public boolean active;
 
+    /**
+     * Create a game with a random map and one Pac-Man
+     */
     public Game() {
         this(new TileMap(20), 1);
     }
 
+    /**
+     * Create a game with a map and some Pac-Man
+     * 
+     * @param map         the map of the game
+     * @param pacmanCount the amount of Pac-Man in the game
+     */
     public Game(TileMap map, int pacmanCount) {
         this.map = map;
         this.dotList = new ArrayList<>();

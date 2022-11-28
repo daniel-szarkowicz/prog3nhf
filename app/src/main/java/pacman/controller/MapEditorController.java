@@ -9,6 +9,9 @@ import pacman.MapEditorMode;
 import pacman.model.MapEditor;
 import pacman.view.MapView;
 
+/**
+ * The main controller of the map editor
+ */
 public class MapEditorController implements KeyListener, MouseListener {
     private final MapEditor model;
     public MapEditorMode mode;

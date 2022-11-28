@@ -8,7 +8,7 @@ zip:
 	cp app/build/diagrams/main.svg FK0IEH
 	cp build/felhasznaloi_kezikonyv.pdf FK0IEH
 	zip FK0IEH.zip -r FK0IEH
-	
+
 clean:
 	rm -rf FK0IEH.zip
 	rm -rf FK0IEH

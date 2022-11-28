@@ -11,17 +11,26 @@ import javax.swing.JPanel;
 
 import pacman.model.Game;
 
+/**
+ * The main view of the game
+ */
 public class GameView extends JPanel {
     private final Game model;
 
     private final List<EntityView> entityList;
     private final MapView map;
 
+    /**
+     * Creates a new view for the given model
+     * 
+     * @param model        the model to view
+     * @param pacmanColors the list of configured colors for the Pac-Man
+     */
     public GameView(Game model, List<Color> pacmanColors) {
         this.model = model;
         this.entityList = new ArrayList<>();
         if (pacmanColors.size() < this.model.pacmanList.size()) {
-            throw new RuntimeException("Túl kevés a cucc!");
+            throw new RuntimeException("Not enough colors for the Pac-Man!");
         }
         for (int i = 0; i < this.model.pacmanList.size(); ++i) {
             this.entityList.add(new PacmanView(this.model.pacmanList.get(i), pacmanColors.get(i)));
@@ -32,16 +41,16 @@ public class GameView extends JPanel {
         for (var largeDot : this.model.largeDotList) {
             this.entityList.add(new LargeDotView(largeDot));
         }
-        for (var blinky: this.model.blinkyList) {
+        for (var blinky : this.model.blinkyList) {
             this.entityList.add(new MonsterView(blinky, Color.RED));
         }
-        for (var inky: this.model.inkyList) {
+        for (var inky : this.model.inkyList) {
             this.entityList.add(new MonsterView(inky, Color.BLUE));
         }
-        for (var pinky: this.model.pinkyList) {
+        for (var pinky : this.model.pinkyList) {
             this.entityList.add(new MonsterView(pinky, Color.PINK));
         }
-        for (var clyde: this.model.clydeList) {
+        for (var clyde : this.model.clydeList) {
             this.entityList.add(new MonsterView(clyde, Color.ORANGE));
         }
         this.map = new MapView(this.model.map);

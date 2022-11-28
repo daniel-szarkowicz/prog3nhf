@@ -18,6 +18,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * The model of the map
+ */
 public class TileMap implements Iterable<Tile>, Serializable {
     private List<Tile> tiles;
     private int width;
@@ -26,10 +29,21 @@ public class TileMap implements Iterable<Tile>, Serializable {
     public Tile monsterSpawn;
     public List<Entity> pacmanList;
 
+    /**
+     * Create a map with the given size
+     * 
+     * @param size the size of the map
+     */
     public TileMap(int size) {
         this(size, size);
     }
 
+    /**
+     * Create a map with the given width and height
+     * 
+     * @param width  the width of the map
+     * @param height the height of the map
+     */
     public TileMap(int width, int height) {
         this.width = width;
         this.height = height;
@@ -70,6 +84,9 @@ public class TileMap implements Iterable<Tile>, Serializable {
         }
     }
 
+    /**
+     * An iterator over the tiles of the map
+     */
     @Override
     public Iterator<Tile> iterator() {
         return tiles.iterator();
@@ -164,6 +181,14 @@ public class TileMap implements Iterable<Tile>, Serializable {
         }
     }
 
+    /**
+     * Creates a list of tiles that has a Pac-Man on it.
+     * <p>
+     * This is needed for the {@link pacman.controller.PinkyController} and the
+     * {@link pacman.controller.ClydeController} to find the sortest path.
+     * 
+     * @return a list of tiles that has a Pac-Man on them.
+     */
     public List<Tile> getPacmanTiles() {
         var pacmanTiles = new ArrayList<Tile>();
         for (var pacman : this.pacmanList) {

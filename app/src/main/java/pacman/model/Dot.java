@@ -1,5 +1,8 @@
 package pacman.model;
 
+/**
+ * The model of a dot
+ */
 public class Dot extends Entity {
     public Dot(Tile startingTile) {
         super(startingTile);

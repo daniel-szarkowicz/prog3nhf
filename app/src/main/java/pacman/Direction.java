@@ -1,13 +1,25 @@
 package pacman;
 
+/**
+ * The directions used in the game
+ */
 public enum Direction {
     UP(0.0, -1.0, 90),
     DOWN(0.0, 1.0, 270),
     RIGHT(1.0, 0.0, 0),
     LEFT(-1.0, 0.0, 180);
 
+    /**
+     * The X offset of the direction
+     */
     public double x;
+    /**
+     * The Y offset of the direction
+     */
     public double y;
+    /**
+     * The angle of the direction
+     */
     public int angle;
 
     Direction(double x, double y, int angle) {

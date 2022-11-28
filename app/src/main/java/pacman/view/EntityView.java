@@ -4,9 +4,17 @@ import java.awt.Graphics2D;
 
 import pacman.model.Entity;
 
+/**
+ * The abstract baseclass for all entity views
+ */
 public abstract class EntityView {
     private final Entity model;
 
+    /**
+     * Create an entity view for the given model
+     * 
+     * @param model the model to view
+     */
     public EntityView(Entity model) {
         this.model = model;
     }

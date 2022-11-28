@@ -8,11 +8,19 @@ import javax.swing.JPanel;
 
 import pacman.model.MapEditor;
 
+/**
+ * The main view of the map editor
+ */
 public class MapEditorView extends JPanel {
     private final MapEditor model;
 
     private MapView map;
 
+    /**
+     * Creates a view with the given model
+     * 
+     * @param model the model to view
+     */
     public MapEditorView(MapEditor model) {
         this.model = model;
         this.map = new MapView(this.model.map);
@@ -36,10 +44,10 @@ public class MapEditorView extends JPanel {
                 monsterSpawn.getY() * MapView.TILE_SIZE,
                 MapView.TILE_SIZE, MapView.TILE_SIZE);
     }
-    
+
     /**
-    Renews the {@link MapView} when the map changed
-    */
+     * Renews the {@link MapView} when the map changed
+     */
     public void renewMap() {
         this.map = new MapView(this.model.map);
     }

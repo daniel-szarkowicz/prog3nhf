@@ -6,10 +6,19 @@ import java.awt.Graphics2D;
 import pacman.model.Entity;
 import pacman.model.Pacman;
 
+/**
+ * The view for a Pac-Man
+ */
 public class PacmanView extends EntityView {
     private static final int MOUTH_ANGLE = 40;
     private final Color color;
 
+    /**
+     * Creates a view for the given model with a color
+     * 
+     * @param model the model to view
+     * @param color the color of the view
+     */
     public PacmanView(Entity model, Color color) {
         super(model);
         this.color = color;
@@ -17,7 +26,7 @@ public class PacmanView extends EntityView {
 
     @Override
     public void view(Graphics2D g, Entity model) {
-        if(((Pacman) model).isStrong()) {
+        if (((Pacman) model).isStrong()) {
             g.setColor(Color.RED);
             g.fillArc((int) (model.getX() * MapView.TILE_SIZE) - 2,
                     (int) (model.getY() * MapView.TILE_SIZE) - 2,

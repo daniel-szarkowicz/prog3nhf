@@ -6,14 +6,25 @@ import java.awt.Graphics2D;
 import pacman.Direction;
 import pacman.model.TileMap;
 
+/**
+ * The view that displays the map
+ */
 public class MapView {
     public static final int TILE_SIZE = 50;
     private final TileMap model;
 
+    /**
+     * @param model the model to view
+     */
     public MapView(TileMap model) {
         this.model = model;
     }
 
+    /**
+     * Draws the map
+     * 
+     * @param g the {@link Graphics2D} to draw on
+     */
     public void draw(Graphics2D g) {
         for (var tile : model) {
             if (tile.isWall()) {

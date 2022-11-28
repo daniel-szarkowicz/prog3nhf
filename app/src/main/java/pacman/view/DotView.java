@@ -5,8 +5,14 @@ import java.awt.Graphics2D;
 
 import pacman.model.Entity;
 
+/**
+ * The view for a dot
+ */
 public class DotView extends EntityView {
 
+    /**
+     * @param model the model to view
+     */
     public DotView(Entity model) {
         super(model);
     }

@@ -3,10 +3,16 @@ package pacman;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * The view and state of the main menu
+ */
 public class MainMenu extends JPanel {
     public boolean active;
     public MenuAction action;
 
+    /**
+     * Creates a main menu
+     */
     public MainMenu() {
         var playButton = new JButton("Play");
         var loadButton = new JButton("Load");

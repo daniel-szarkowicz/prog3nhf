@@ -3,15 +3,22 @@ package pacman.controller;
 import pacman.Direction;
 import pacman.model.Entity;
 
+/**
+The controller for the Clyde monster
+*/
 public class ClydeController extends EntityController {
     public ClydeController(Entity model) {
         super(model);
     }
 
+    /**
+    Clyde move randomly when Pac-Man is far, but starts chasing when it gets
+    close
+    */
     @Override
     public void control(double delta, Entity model) {
         var pathToPacman = model.getTile().getPathToClosestPacman();
-        if (pathToPacman != null && pathToPacman.length < 5) {
+        if (pathToPacman != null && pathToPacman.length <= 7) {
             model.setNextDirection(pathToPacman.direction);
             model.move(2.0, delta);
         }

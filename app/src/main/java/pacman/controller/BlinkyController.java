@@ -3,11 +3,17 @@ package pacman.controller;
 import pacman.Direction;
 import pacman.model.Entity;
 
+/**
+The controller of the Blinky monster
+*/
 public class BlinkyController extends EntityController {
     public BlinkyController(Entity model) {
         super(model);
     }
 
+    /**
+    Blinky follows Pac-Man on their path
+    */
     @Override
     public void control(double delta, Entity model) {
         var nextDirection = model.getTile().getPacmanPathDirection();

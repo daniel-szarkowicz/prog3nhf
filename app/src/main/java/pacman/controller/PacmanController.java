@@ -6,6 +6,9 @@ import java.util.Map;
 import pacman.PacmanCommand;
 import pacman.model.Entity;
 
+/**
+ * The controller for the Pac-Man
+ */
 public class PacmanController extends EntityController {
     private final Map<Integer, PacmanCommand> keymap;
 
